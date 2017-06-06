@@ -67,16 +67,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GetAPIKeyServlet.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GetAPIKeyServlet.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/theah64/frenemy/web/servlets/GetAPIKeyServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="945">
-              <caret line="63" column="47" lean-forward="false" selection-start-line="63" selection-start-column="47" selection-end-line="63" selection-end-column="47" />
+            <state relative-caret-position="120">
+              <caret line="8" column="30" lean-forward="true" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="e#1015#1016#0" expanded="true" />
                 <element signature="e#1043#1044#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="terminal.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/WEB-INF/terminal.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="26" column="47" lean-forward="false" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -176,7 +185,6 @@
         <option value="$PROJECT_DIR$/src/com/theah64/frenemy/web/database/Connection.java" />
         <option value="$PROJECT_DIR$/src/com/theah64/frenemy/web/utils/PathInfo.java" />
         <option value="$PROJECT_DIR$/src/com/theah64/frenemy/web/exceptions/RequestException.java" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/terminal.jsp" />
         <option value="$PROJECT_DIR$/extras/database.sql" />
         <option value="$PROJECT_DIR$/src/com/theah64/frenemy/web/utils/APIResponse.java" />
         <option value="$PROJECT_DIR$/src/com/theah64/frenemy/web/servlets/AdvancedBaseServlet.java" />
@@ -187,6 +195,7 @@
         <option value="$PROJECT_DIR$/src/com/theah64/frenemy/web/utils/HeaderSecurity.java" />
         <option value="$PROJECT_DIR$/src/com/theah64/frenemy/web/database/tables/Frenemies.java" />
         <option value="$PROJECT_DIR$/src/com/theah64/frenemy/web/servlets/GetAPIKeyServlet.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/terminal.jsp" />
       </list>
     </option>
   </component>
@@ -425,6 +434,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="js.eslint.eslintPackage" value="" />
+    <property name="SearchEverywhereHistoryKey" value="ter&#9;FILE&#9;file:///home/theapache64/Documents/projects/frenemy/web/web/WEB-INF/terminal.jsp" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -911,16 +921,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1496779948988</updated>
-      <workItem from="1496779951139" duration="6933000" />
+      <workItem from="1496779951139" duration="7125000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6933000" />
+    <option name="totallyTimeSpent" value="7125000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="51" y="24" width="1315" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -944,7 +954,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33681074" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24942966" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24942966" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -1074,14 +1084,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/terminal.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="11" column="15" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/theah64/frenemy/web/utils/APIResponse.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -1174,13 +1176,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/theah64/frenemy/web/servlets/GetAPIKeyServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="63" column="47" lean-forward="false" selection-start-line="63" selection-start-column="47" selection-end-line="63" selection-end-column="47" />
+        <state relative-caret-position="120">
+          <caret line="8" column="30" lean-forward="true" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="e#1015#1016#0" expanded="true" />
             <element signature="e#1043#1044#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/terminal.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="26" column="47" lean-forward="false" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>

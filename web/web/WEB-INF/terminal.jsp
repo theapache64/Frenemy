@@ -24,7 +24,8 @@
 %>
 <html>
 <head>
-    <title>Frenemy Web</title>
+    <title><%=frenemy.getName()%> @ Frenemy Web
+    </title>
     <%@include file="../common_headers.jsp" %>
     <style>
         * {
