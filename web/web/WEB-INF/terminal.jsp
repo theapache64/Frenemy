@@ -1,10 +1,31 @@
-<%--suppress ALL --%>
+<%@ page import="com.theah64.frenemy.web.utils.PathInfo" %>
+<%@ page import="com.theah64.frenemy.web.model.Frenemy" %>
+<%@ page import="com.theah64.frenemy.web.database.tables.Frenemies" %>
+<%@ page import="com.theah64.frenemy.web.exceptions.RequestException" %><%--suppress ALL --%>
+<%
+    Frenemy frenemy = null;
+    try {
+        final PathInfo pathInfo = new PathInfo(request.getPathInfo(), 1, 1);
+        final String deviceHash = pathInfo.getPart(1);
+        System.out.println("Device hash : " + deviceHash);
+
+        frenemy = Frenemies.getInstance().get(Frenemies.COLUMN_DEVICE_HASH, deviceHash);
+        if (frenemy == null) {
+            throw new RequestException("Invalid frenemy");
+        }
+
+    } catch (PathInfo.PathInfoException | RequestException e) {
+        e.printStackTrace();
+        response.sendError(HttpServletResponse.SC_NOT_FOUND, e.getMessage());
+        return;
+    }
 
 
+%>
 <html>
 <head>
     <title>Frenemy Web</title>
-    <%@include file="common_headers.jsp" %>
+    <%@include file="../common_headers.jsp" %>
     <style>
         * {
             font-family: 'Ubuntu Mono', monospace;

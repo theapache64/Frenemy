@@ -1,4 +1,4 @@
-<%@ page import="com.theah64.frenemy.web.Connection" %>
+<%@ page import="com.theah64.frenemy.web.database.Connection" %>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%--
@@ -10,7 +10,7 @@ TODO: Need to add a favicon
     if (Connection.isDebugMode()) {
 %>
 <%--OFFLINE RESOURCES--%>
-<script src="js/jquery-2.2.4.min.js"></script>
+<script src="/frenemy/web/js/jquery-2.2.4.min.js"></script>
 <%
 } else {
 %>

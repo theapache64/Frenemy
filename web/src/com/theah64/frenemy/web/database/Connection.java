@@ -1,4 +1,4 @@
-package com.theah64.frenemy.web;
+package com.theah64.frenemy.web.database;
 
 
 import javax.naming.Context;
@@ -15,7 +15,7 @@ public class Connection {
     private static final boolean debugMode = true;
     private static DataSource ds;
 
-    static java.sql.Connection getConnection() {
+    public static java.sql.Connection getConnection() {
 
         try {
 
