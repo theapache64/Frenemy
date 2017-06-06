@@ -2,6 +2,7 @@ package com.theah64.frenemy.web.servlets;
 
 
 import com.theah64.frenemy.web.database.tables.BaseTable;
+import com.theah64.frenemy.web.exceptions.RequestException;
 import com.theah64.frenemy.web.utils.APIResponse;
 import com.theah64.frenemy.web.utils.HeaderSecurity;
 import com.theah64.frenemy.web.utils.Request;
@@ -80,7 +81,7 @@ public abstract class AdvancedBaseServlet extends HttpServlet {
 
     protected abstract String[] getRequiredParameters();
 
-    protected abstract void doAdvancedPost() throws JSONException, SQLException;
+    protected abstract void doAdvancedPost() throws JSONException, SQLException, RequestException;
 
     public HeaderSecurity getHeaderSecurity() {
         if (!isSecureServlet()) {

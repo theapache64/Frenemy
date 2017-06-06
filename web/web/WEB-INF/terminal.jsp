@@ -5,8 +5,9 @@
 <%
     Frenemy frenemy = null;
     try {
-        final PathInfo pathInfo = new PathInfo(request.getPathInfo(), 1, 1);
-        final String deviceHash = pathInfo.getPart(1);
+        final PathInfo pathInfo = new PathInfo(request.getPathInfo(), 2, 2);
+        final String token = pathInfo.getPart(1);
+        final String deviceHash = pathInfo.getPart(2);
         System.out.println("Device hash : " + deviceHash);
 
         frenemy = Frenemies.getInstance().get(Frenemies.COLUMN_DEVICE_HASH, deviceHash);
@@ -72,13 +73,15 @@
 
                 if (e.keyCode == 13) {
                     //Enter pressed
-                    $command = $("input#iCommand").val();
-                    $("input#iCommand").attr('onblur', null);
+                    var prevICommand = $("input#iCommand");
+                    $command = $(prevICommand).val();
+                    $(prevICommand).attr('onblur', null);
                     $("body").append(ROW);
 
-                    $("body div:last input#iCommand").attr('onblur', 'this.focus()');
-                    $("body div:last input#iCommand").focus();
-                    $("body div:last input#iCommand").on('keydown', processCommand);
+                    var lastICommand = $("body div:last input#iCommand");
+                    $(lastICommand).attr('onblur', 'this.focus()');
+                    $(lastICommand).focus();
+                    $(lastICommand).on('keydown', processCommand);
                 }
 
             }

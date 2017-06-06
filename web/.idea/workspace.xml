@@ -55,18 +55,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdvancedBaseServlet.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/theah64/frenemy/web/servlets/AdvancedBaseServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="82" column="80" lean-forward="false" selection-start-line="82" selection-start-column="80" selection-end-line="82" selection-end-column="80" />
-              <folding>
-                <marker date="1496786625849" expanded="true" signature="51:509" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GetAPIKeyServlet.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/theah64/frenemy/web/servlets/GetAPIKeyServlet.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -80,12 +68,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="terminal.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="terminal.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/terminal.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="26" column="47" lean-forward="false" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+            <state relative-caret-position="75">
+              <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FCMUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/theah64/frenemy/web/utils/FCMUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="14" column="21" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WakeUpServlet.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/theah64/frenemy/web/servlets/WakeUpServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="825">
+              <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,16 +115,6 @@
       </file>
       <file leaf-file-name="RandomString.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/theah64/frenemy/web/utils/RandomString.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="APIResponse.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/theah64/frenemy/web/utils/APIResponse.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
               <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
@@ -157,6 +157,7 @@
       <find>user</find>
       <find>frenemys</find>
       <find>User</find>
+      <find>Location request</find>
     </findStrings>
     <replaceStrings>
       <replace>theah64</replace>
@@ -165,6 +166,7 @@
       <replace>frenemy</replace>
       <replace>frenemies</replace>
       <replace>Frenemy</replace>
+      <replace>Wakeup request</replace>
     </replaceStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -196,6 +198,9 @@
         <option value="$PROJECT_DIR$/src/com/theah64/frenemy/web/database/tables/Frenemies.java" />
         <option value="$PROJECT_DIR$/src/com/theah64/frenemy/web/servlets/GetAPIKeyServlet.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/terminal.jsp" />
+        <option value="$PROJECT_DIR$/src/com/theah64/frenemy/web/utils/FCMUtils.java" />
+        <option value="$PROJECT_DIR$/src/com/theah64/frenemy/web/servlets/RequestLocationServlet.java" />
+        <option value="$PROJECT_DIR$/src/com/theah64/frenemy/web/servlets/WakeUpServlet.java" />
       </list>
     </option>
   </component>
@@ -441,9 +446,9 @@
       <recent name="$PROJECT_DIR$/web/WEB-INF" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/com/theah64/frenemy/web/database/tables" />
-      <recent name="$PROJECT_DIR$/src/com/theah64/frenemy/web/utils" />
       <recent name="$PROJECT_DIR$/src/com/theah64/frenemy/web/servlets" />
+      <recent name="$PROJECT_DIR$/src/com/theah64/frenemy/web/utils" />
+      <recent name="$PROJECT_DIR$/src/com/theah64/frenemy/web/database/tables" />
       <recent name="$PROJECT_DIR$/src/com/theah64/frenemy/web" />
       <recent name="$PROJECT_DIR$/web/js" />
     </key>
@@ -921,12 +926,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1496779948988</updated>
-      <workItem from="1496779951139" duration="7125000" />
+      <workItem from="1496779951139" duration="8204000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7125000" />
+    <option name="totallyTimeSpent" value="8204000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="51" y="24" width="1315" height="744" extended-state="6" />
@@ -993,7 +998,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33681074" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24942966" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24942966" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1097,7 +1102,7 @@
         <state relative-caret-position="205">
           <caret line="82" column="80" lean-forward="false" selection-start-line="82" selection-start-column="80" selection-end-line="82" selection-end-column="80" />
           <folding>
-            <marker date="1496786625849" expanded="true" signature="51:509" ph="..." />
+            <marker date="1496788105656" expanded="true" signature="51:569" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1187,9 +1192,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/terminal.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="26" column="47" lean-forward="false" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+        <state relative-caret-position="75">
+          <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/theah64/frenemy/web/utils/FCMUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="14" column="21" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/theah64/frenemy/web/servlets/WakeUpServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
