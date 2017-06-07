@@ -1,9 +1,8 @@
 package com.theah64.frenemy.web.servlets;
 
 
-import com.theah64.frenemy.web.database.tables.BaseTable;
 import com.theah64.frenemy.web.exceptions.RequestException;
-import com.theah64.frenemy.web.utils.APIResponse;
+import com.theah64.frenemy.web.utils.Response;
 import com.theah64.frenemy.web.utils.HeaderSecurity;
 import com.theah64.frenemy.web.utils.Request;
 import org.json.JSONException;
@@ -43,7 +42,7 @@ public abstract class AdvancedBaseServlet extends HttpServlet {
         final PrintWriter out = response.getWriter();
 
         //GET Method not supported
-        out.write(new APIResponse(methodErrorMessage).getResponse());
+        out.write(new Response(methodErrorMessage).getResponse());
     }
 
     public PrintWriter getWriter() {
@@ -69,7 +68,7 @@ public abstract class AdvancedBaseServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            out.write(new APIResponse(e.getMessage()).toString());
+            out.write(new Response(e.getMessage()).toString());
         }
     }
 

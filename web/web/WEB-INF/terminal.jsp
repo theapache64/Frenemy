@@ -4,9 +4,10 @@
 <%@ page import="com.theah64.frenemy.web.exceptions.RequestException" %><%--suppress ALL --%>
 <%
     Frenemy frenemy = null;
+    String token = null;
     try {
         final PathInfo pathInfo = new PathInfo(request.getPathInfo(), 2, 2);
-        final String token = pathInfo.getPart(1);
+        token = pathInfo.getPart(1);
         final String deviceHash = pathInfo.getPart(2);
         System.out.println("Device hash : " + deviceHash);
 
@@ -38,8 +39,12 @@
             background-color: #300A24;
         }
 
-        span.spanDevice {
+        span.spanDevice, p.status_success {
             color: #7FE234;
+        }
+
+        p.status_danger {
+            color: #C8031A;
         }
 
         span.spanPath {
@@ -61,7 +66,34 @@
     <script>
         $(document).ready(function () {
 
-            const ROW = '<div class="divLineNode"> <span class="spanDevice">frenemy@theapache64</span>:<span class="spanPath">~</span> <input id="iCommand" onblur="this.focus()"  autofocus type="text"/> </div>';
+            const ROW = '<div class="divLineNode"> <span class="spanDevice">frenemy@<%=frenemy.getName()%></span>:<span class="spanPath">~</span> <input id="iCommand" onblur="this.focus()"  autofocus type="text"/> </div>';
+
+            var statusDiv = $("div#status");
+
+            //Status update functions
+            function addNormalStatus(msg) {
+                $(statusDiv).append('<p class="status_normal">' + msg + '</p>');
+            }
+
+            function addSuccessStatus(msg) {
+                $(statusDiv).append('<p class="status_success">' + msg + '</p>');
+            }
+
+            function addDangerStatus(msg) {
+                $(statusDiv).append('<p class="status_danger">' + msg + '</p>');
+            }
+
+            //Establishing connection
+            addNormalStatus("Connecting to <%=frenemy.getName()%>...");
+
+
+
+
+            var socketUrl = "<%=(Connection.isDebugMode()
+            ? "ws://localhost:8080/frenemy/web/v1/frenemy_socket/terminal/"+token+"/{frenemy_id}"
+            : "ws://theapache64.xyz:8080/frenemy/web/v1/pigeon_socket/listener/") + frenemy.getId()%>";
+
+
 
             function onConnectionEstablished() {
                 $("body").append(ROW);
@@ -93,6 +125,7 @@
 
 </head>
 <body>
-
+<div id="status" style="margin-top:10px;line-height: 2px">
+</div>
 </body>
 </html>

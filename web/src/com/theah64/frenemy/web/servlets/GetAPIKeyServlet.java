@@ -1,10 +1,9 @@
 package com.theah64.frenemy.web.servlets;
 
 import com.theah64.frenemy.web.database.tables.Frenemies;
-import com.theah64.frenemy.web.exceptions.RequestException;
 
 import com.theah64.frenemy.web.model.Frenemy;
-import com.theah64.frenemy.web.utils.APIResponse;
+import com.theah64.frenemy.web.utils.Response;
 import com.theah64.frenemy.web.utils.RandomString;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,7 +84,7 @@ public class GetAPIKeyServlet extends AdvancedBaseServlet {
         joData.put(Frenemies.COLUMN_ID, frenemy.getId());
 
         //Finally showing api key
-        getWriter().write(new APIResponse("User verified", joData).getResponse());
+        getWriter().write(new Response("User verified", joData).getResponse());
 
 
     }

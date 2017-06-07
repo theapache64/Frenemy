@@ -3,9 +3,8 @@ package com.theah64.frenemy.web.servlets;
 
 import com.theah64.frenemy.web.database.tables.Frenemies;
 import com.theah64.frenemy.web.exceptions.RequestException;
-import com.theah64.frenemy.web.utils.APIResponse;
+import com.theah64.frenemy.web.utils.Response;
 import com.theah64.frenemy.web.utils.FCMUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
 import java.io.IOException;
 
 /**
@@ -60,9 +58,9 @@ public class WakeUpServlet extends AdvancedBaseServlet {
 
                 if (!isEverythingOk) {
                     System.out.println("FCM FAILED: " + joFcmResp);
-                    getWriter().write(new APIResponse("Failed to fire fcm").getResponse());
+                    getWriter().write(new Response("Failed to fire fcm").getResponse());
                 } else {
-                    getWriter().write(new APIResponse("Wakeup request sent", null).getResponse());
+                    getWriter().write(new Response("Wakeup request sent", null).getResponse());
                 }
 
 
