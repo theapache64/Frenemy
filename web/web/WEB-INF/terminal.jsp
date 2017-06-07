@@ -4,10 +4,10 @@
 <%@ page import="com.theah64.frenemy.web.exceptions.RequestException" %><%--suppress ALL --%>
 <%
     Frenemy frenemy = null;
-    String token = null;
+    String terminalToken = null;
     try {
         final PathInfo pathInfo = new PathInfo(request.getPathInfo(), 2, 2);
-        token = pathInfo.getPart(1);
+        terminalToken = pathInfo.getPart(1);
         final String deviceHash = pathInfo.getPart(2);
         System.out.println("Device hash : " + deviceHash);
 
@@ -39,8 +39,12 @@
             background-color: #300A24;
         }
 
-        span.spanDevice, p.status_success {
+        span.spanDevice {
             color: #7FE234;
+        }
+
+        p.status_success {
+            color: white;
         }
 
         p.status_danger {
@@ -68,7 +72,8 @@
 
             const ROW = '<div class="divLineNode"> <span class="spanDevice">frenemy@<%=frenemy.getName()%></span>:<span class="spanPath">~</span> <input id="iCommand" onblur="this.focus()"  autofocus type="text"/> </div>';
 
-            var statusDiv = $("div#status");
+            var statusDiv = $("body");
+
 
             //Status update functions
             function addNormalStatus(msg) {
@@ -87,26 +92,40 @@
             addNormalStatus("Connecting to <%=frenemy.getName()%>...");
 
 
+            var socketUrl = "<%=Connection.isDebugMode()
+            ? "ws://localhost:8080/"
+            : "ws://theapache64.xyz:8080/"%>";
 
+            socketUrl += "frenemy/web/v1/frenemy_socket/terminal/<%=terminalToken%>/<%=frenemy.getApiKey()%>";
 
-            var socketUrl = "<%=(Connection.isDebugMode()
-            ? "ws://localhost:8080/frenemy/web/v1/frenemy_socket/terminal/"+token+"/{frenemy_id}"
-            : "ws://theapache64.xyz:8080/frenemy/web/v1/pigeon_socket/listener/") + frenemy.getId()%>";
+            console.log("Socket URL : " + socketUrl);
 
+            //Building socket
+            var webSocket = new WebSocket(socketUrl);
 
+            webSocket.onopen = function (evnt) {
+                console.log("Socket opened");
+            };
 
-            function onConnectionEstablished() {
-                $("body").append(ROW);
-            }
+            webSocket.onmessage = function (evnt) {
+                console.log("Socket got new message");
+                console.log(evnt);
 
-            onConnectionEstablished();
+                var data = JSON.parse(evnt.data);
+                if (data.error) {
+                    addDangerStatus(data.message);
+                } else {
 
-            function processCommand(e) {
+                    addSuccessStatus(data.message);
 
-                if (e.keyCode == 13) {
-                    //Enter pressed
+                    if (data.is_wakeup) {
+                        onConnectionEstablished();
+                    }
+
+                }
+
+                if (!data.is_wakeup) {
                     var prevICommand = $("input#iCommand");
-                    $command = $(prevICommand).val();
                     $(prevICommand).attr('onblur', null);
                     $("body").append(ROW);
 
@@ -115,17 +134,52 @@
                     $(lastICommand).focus();
                     $(lastICommand).on('keydown', processCommand);
                 }
+            };
 
+            webSocket.onclose = function (evnt) {
+                console.log("Socket closed!");
+                addDangerStatus(evnt.reason);
+            };
+
+            webSocket.onerror = function (evnt) {
+                console.log("Socket error occurred");
+            };
+
+            function onConnectionEstablished() {
+                $("body").append(ROW);
+                $("input#iCommand").on('keydown', processCommand);
             }
 
-            $("input#iCommand").on('keydown', processCommand);
+
+            function getFormat(command) {
+                var data = {
+                    command: command,
+                    message: "execute " + command
+                };
+
+                return JSON.stringify(data);
+            }
+
+
+            function processCommand(e) {
+
+                if (e.keyCode == 13) {
+                    var lastICommand = $("body div:last input#iCommand");
+                    $(lastICommand).attr('onblur', null);
+                    $(lastICommand).attr('onfocus', 'this.blur()');
+                    $(lastICommand).blur();
+                    var command = $(lastICommand).val();
+                    webSocket.send(getFormat(command));
+                    //Enter pressed
+                    console.log("Command sent");
+                }
+            }
 
         });
     </script>
 
 </head>
 <body>
-<div id="status" style="margin-top:10px;line-height: 2px">
-</div>
+
 </body>
 </html>

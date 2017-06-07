@@ -15,7 +15,7 @@ import java.net.URL;
 public class FCMUtils {
 
     private static final String FCM_SEND_URL = "https://fcm.googleapis.com/fcm/send";
-    private static final String FCM_NOTIFICATION_KEY = "AAAAPhR8lrk:APA91bFQjEEOrSQUg2y5fPOD0Xe_mv4bb6MsgYsZPu3nJhzHEsT-LA74GSDcpDOasDjH3Ms8EdkLb6oXbk0NIENRAEW6dkh3jgyZitScDYS8sAYIvaWOmhMh_xNGUEu9ix0zs1H05LSL";
+    private static final String FCM_NOTIFICATION_KEY = "AAAAiHNbpVY:APA91bHMqa2585JSRDXv6Uf93PIMT6fpDD45nz4RxPSmP4Z8d8oeDDLKlerKcuxHBPU3G7lIHAHtk7WKQCVsbfL4NEOL0wgesUSzpifFC_c_umUzA03WdwvC50SuNdl660HsIjgGgHDC";
 
 
     public static JSONObject sendWakeUp(String fcmId, final String token) {
@@ -27,7 +27,7 @@ public class FCMUtils {
 
             final JSONObject joData = new JSONObject();
             joData.put("type", "wakeup");
-            joData.put("token", token);
+            joData.put("terminal_token", token);
             joFcm.put("data", joData);
 
         } catch (JSONException e) {

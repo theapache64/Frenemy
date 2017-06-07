@@ -45,7 +45,9 @@ public class FrenemySocket {
             if (whois.equals(WHOIS_TERMINAL)) {
 
                 if (terminalSessions.get(terminalToken) == null) {
+
                     System.out.println("Terminal joined");
+
                     terminalSessions.put(terminalToken, session);
 
                     //Sending wakeup request to device
@@ -79,13 +81,11 @@ public class FrenemySocket {
                     //Tell the terminal that the device has been joined
                     final Session terminalSession = terminalSessions.get(terminalToken);
 
-                    if (terminalSession != null) {
-                        terminalSession.getBasicRemote().sendText(new Response("Device connected", null).getResponse());
-                    } else {
+                    if (terminalSession == null) {
                         throw new FrenemySocketException("No terminals found with the token " + terminalToken, true);
                     }
                 } else {
-                    throw new FrenemySocketException("Device already exist with the api_key " + terminalToken, true);
+                    throw new FrenemySocketException("Device already exist with the api_key " + apiKey, true);
                 }
 
             }

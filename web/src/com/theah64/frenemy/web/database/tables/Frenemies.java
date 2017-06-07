@@ -30,6 +30,8 @@ public class Frenemies extends BaseTable<Frenemy> {
     public Frenemy get(String column, String value) {
         Frenemy frenemy = null;
         final String query = String.format("SELECT id,name,fcm_id, api_key FROM frenemies WHERE %s = ? AND is_active = 1 LIMIT 1;", column);
+        final String query2 = String.format("SELECT id,name,fcm_id, api_key FROM frenemies WHERE %s = '%s' AND is_active = 1 LIMIT 1;", column, value);
+        System.out.println(query2);
         final java.sql.Connection con = Connection.getConnection();
         try {
             final PreparedStatement ps = con.prepareStatement(query);

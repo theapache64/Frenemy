@@ -48,7 +48,7 @@ public class GetAPIKeyServlet extends AdvancedBaseServlet {
         System.out.println("----------------------");
         System.out.println("New api request received....");
 
-        final String deviceHash = getStringParameter(Frenemies.COLUMN_DEVICE_HASH);
+        final String deviceHash = getStringParameter(Frenemies.COLUMN_DEVICE_HASH).trim().toLowerCase();
         final String fcmId = getStringParameter(Frenemies.COLUMN_FCM_ID);
 
         final Frenemies frenemiesTable = Frenemies.getInstance();
