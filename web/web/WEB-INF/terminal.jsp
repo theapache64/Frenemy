@@ -1,14 +1,15 @@
 <%@ page import="com.theah64.frenemy.web.utils.PathInfo" %>
 <%@ page import="com.theah64.frenemy.web.model.Frenemy" %>
 <%@ page import="com.theah64.frenemy.web.database.tables.Frenemies" %>
-<%@ page import="com.theah64.frenemy.web.exceptions.RequestException" %><%--suppress ALL --%>
+<%@ page import="com.theah64.frenemy.web.exceptions.RequestException" %>
+<%@ page import="com.theah64.frenemy.web.utils.RandomString" %><%--suppress ALL --%>
 <%
     Frenemy frenemy = null;
     String terminalToken = null;
     try {
-        final PathInfo pathInfo = new PathInfo(request.getPathInfo(), 2, 2);
-        terminalToken = pathInfo.getPart(1);
-        final String deviceHash = pathInfo.getPart(2);
+        final PathInfo pathInfo = new PathInfo(request.getPathInfo(), 1, 1);
+        terminalToken = RandomString.getRandomString(30);
+        final String deviceHash = pathInfo.getPart(1);
         System.out.println("Device hash : " + deviceHash);
 
         frenemy = Frenemies.getInstance().get(Frenemies.COLUMN_DEVICE_HASH, deviceHash);
@@ -124,7 +125,7 @@
 
                 }
 
-                if (!data.is_wakeup) {
+                if (!data.is_wakeup && data.is_finished) {
                     var prevICommand = $("input#iCommand");
                     $(prevICommand).attr('onblur', null);
                     $("body").append(ROW);

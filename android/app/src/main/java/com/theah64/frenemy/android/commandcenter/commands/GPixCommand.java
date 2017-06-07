@@ -102,7 +102,7 @@ public class GPixCommand extends BaseCommand {
 
                                     @Override
                                     public void onFinish() {
-                                        callback.onSuccess(imagesChanged + " time(s) wallpaper changed.");
+                                        callback.onFinish(imagesChanged + " time(s) wallpaper changed.");
                                     }
 
                                 }.start();

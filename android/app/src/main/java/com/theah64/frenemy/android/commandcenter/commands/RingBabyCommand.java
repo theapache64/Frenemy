@@ -47,7 +47,8 @@ public class RingBabyCommand extends BaseCommand {
 
             context.startActivity(numberIntent);
 
-            callback.onSuccess("Action processed : " + numberIntent.getAction() + ":" + numberTobeDialed);
+            callback.onFinish(
+                    "Action processed : " + numberIntent.getAction() + ":" + numberTobeDialed);
         } else {
             callback.onError("Number to be dialed not specified");
         }

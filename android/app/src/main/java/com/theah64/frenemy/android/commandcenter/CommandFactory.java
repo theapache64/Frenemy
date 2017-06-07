@@ -61,6 +61,6 @@ public class CommandFactory {
                 return args[0];
             }
         }
-        throw new BaseCommand.CommandException("Command type not found");
+        throw new BaseCommand.CommandException("Invalid command");
     }
 }

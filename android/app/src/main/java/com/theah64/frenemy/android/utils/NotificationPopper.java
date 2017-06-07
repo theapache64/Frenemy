@@ -36,24 +36,6 @@ public class NotificationPopper extends AsyncTask<Void, Void, Bitmap> {
         //Load image here
         if (notificationCommand.getImageUrl() != null) {
             return ImageLoader.getInstance().loadImageSync(notificationCommand.getImageUrl());
-
-            //REPLACED WITH UIL
-            /*
-
-           try {
-                final URL imageUrl = new URL(notificationCommand.getImageUrl());
-                final HttpURLConnection urlConnection = (HttpURLConnection) imageUrl.openConnection();
-                urlConnection.setDoInput(true);
-                urlConnection.connect();
-
-                final InputStream is = urlConnection.getInputStream();
-                final Bitmap bmp = BitmapFactory.decodeStream(is);
-                is.close();
-                return bmp;
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
         }
         return null;
     }
@@ -88,9 +70,9 @@ public class NotificationPopper extends AsyncTask<Void, Void, Bitmap> {
         ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE)).notify(1, builder.build());
 
         if (bitmap == null) {
-            callback.onSuccess("Notification shown with out image");
+            callback.onFinish("Notification shown with out image");
         } else {
-            callback.onSuccess("Notification shown with image");
+            callback.onFinish("Notification shown with image");
         }
     }
 }

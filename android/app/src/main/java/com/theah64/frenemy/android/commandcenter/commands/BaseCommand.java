@@ -20,7 +20,7 @@ public abstract class BaseCommand {
         if (command != null && !command.isEmpty()) {
             this.args = command.split(" ");
             if (args.length <= 2) {
-                throw new IllegalArgumentException("Command should have at least 3 parts");
+                throw new CommandException("Command should have at least 2 parts");
             } else {
                 //Valid command syntax, check for options
                 if (getOptions() != null) {
@@ -52,6 +52,9 @@ public abstract class BaseCommand {
         void onInfo(final String message);
 
         void onSuccess(final String message);
+
+        void onFinish(final String message);
+
     }
 
     public static class CommandException extends Exception {

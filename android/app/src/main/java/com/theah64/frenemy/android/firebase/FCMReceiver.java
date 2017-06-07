@@ -6,12 +6,9 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.theah64.frenemy.android.models.SocketMessage;
 import com.theah64.frenemy.android.utils.APIRequestGateway;
+import com.theah64.frenemy.android.utils.AdvancedWebSocketClient;
 import com.theah64.frenemy.android.utils.WebSocketHelper;
 
-import org.json.JSONException;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Map;
 
 public class FCMReceiver extends FirebaseMessagingService {
@@ -32,11 +29,8 @@ public class FCMReceiver extends FirebaseMessagingService {
             new APIRequestGateway(this, new APIRequestGateway.APIRequestGatewayCallback() {
                 @Override
                 public void onReadyToRequest(String apiKey, String frenemyId) {
-                    try {
-                        WebSocketHelper.getInstance(FCMReceiver.this).getHelper(terminalToken, apiKey).send(new SocketMessage(SocketMessage.WAKEUP_RESPONSE));
-                    } catch (IOException | JSONException | URISyntaxException e) {
-                        e.printStackTrace();
-                    }
+                    AdvancedWebSocketClient helper = WebSocketHelper.getInstance(FCMReceiver.this).getHelper(terminalToken, apiKey);
+                    helper.send(new SocketMessage(SocketMessage.WAKEUP_RESPONSE, true));
                 }
 
                 @Override

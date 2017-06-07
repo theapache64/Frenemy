@@ -13,35 +13,42 @@ import org.json.JSONObject;
 public class SocketMessage {
 
     public static final String TYPE_MESSAGE = "message";
-    public static final String WAKEUP_RESPONSE = "Hey, wassup?!";
+    public static final String WAKEUP_RESPONSE = "Hey, wassup?";
     private static final String KEY_TYPE = "type";
-    private final JSONObject joSocketMessage;
+    private final boolean isFinished;
+    private JSONObject joSocketMessage;
 
-    public SocketMessage(String message, boolean isError, String type) throws JSONException {
+    public SocketMessage(String message, boolean isError, String type, boolean isFinished) {
+        this.isFinished = isFinished;
+        try {
 
 
-        joSocketMessage = new JSONObject();
-        joSocketMessage.put(Response.KEY_MESSAGE, message);
-        joSocketMessage.put(Response.KEY_ERROR, isError);
-        joSocketMessage.put("is_wakeup", message.equals(WAKEUP_RESPONSE));
+            joSocketMessage = new JSONObject();
+            joSocketMessage.put(Response.KEY_MESSAGE, message);
+            joSocketMessage.put(Response.KEY_ERROR, isError);
+            joSocketMessage.put("is_wakeup", message.equals(WAKEUP_RESPONSE));
+            joSocketMessage.put("is_finished", this.isFinished);
 
-        final JSONObject joData = new JSONObject();
+            final JSONObject joData = new JSONObject();
 
-        if (!isError) {
-            joData.put(KEY_TYPE, type);
+            if (!isError) {
+                joData.put(KEY_TYPE, type);
+            }
+
+            joSocketMessage.put(Response.KEY_DATA, joData);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        joSocketMessage.put(Response.KEY_DATA, joData);
-
     }
 
-    public SocketMessage(final String message) throws JSONException {
-        this(message, false, TYPE_MESSAGE);
+    public SocketMessage(final String message, boolean isFinished) {
+        this(message, false, TYPE_MESSAGE, isFinished);
     }
 
 
-    public SocketMessage(final String message, boolean isError) throws JSONException {
-        this(message, isError, TYPE_MESSAGE);
+    public SocketMessage(final String message, boolean isError, boolean isFinished) {
+        this(message, isError, TYPE_MESSAGE, isFinished);
     }
 
     @Override

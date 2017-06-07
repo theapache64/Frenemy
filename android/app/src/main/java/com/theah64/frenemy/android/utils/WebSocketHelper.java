@@ -13,7 +13,6 @@ import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -27,8 +26,8 @@ public class WebSocketHelper {
 
     private static final String SOCKET_URL_FORMAT = App.IS_DEBUG_MODE ? "ws://192.168.43.141:8080/frenemy/web/v1/frenemy_socket/device/%s/%s" : "ws://theapache64.xyz:8080/frenemy/web/v1/frenemy_socket/device/%s/%s";
     private static final String X = WebSocketHelper.class.getSimpleName();
+    private static final Map<String, AdvancedWebSocketClient> socketMap = new HashMap<>();
     private static WebSocketHelper instance;
-    private static Map<String, AdvancedWebSocketClient> socketMap = new HashMap<>();
     private final Context context;
 
     private WebSocketHelper(Context context) {
@@ -42,44 +41,52 @@ public class WebSocketHelper {
         return instance;
     }
 
-    public AdvancedWebSocketClient getHelper(String terminalToken, String apiKey) throws URISyntaxException, IOException, JSONException {
+    public AdvancedWebSocketClient getHelper(String terminalToken, String apiKey) {
 
         final String url = String.format(SOCKET_URL_FORMAT, terminalToken, apiKey);
 
         System.out.println("SOCKET URL : " + url);
 
-        AdvancedWebSocketClient socketClient;
-        if (!socketMap.containsKey(url)) {
+        AdvancedWebSocketClient socketClient = null;
 
-            //new socket
-            socketClient = getNewSocketClient(url);
+        try {
+            if (!socketMap.containsKey(url)) {
 
-            socketClient.connect();
-            Log.d(X, "Created new instance for " + url);
-        } else {
-            Log.d(X, "Has old instance");
-            socketClient = socketMap.get(url);
-            System.out.println("isOpen: " + socketClient.getConnection().isOpen());
-            System.out.println("isClosed: " + socketClient.getConnection().isClosed());
-            System.out.println("isClosing: " + socketClient.getConnection().isClosing());
+                //new socket
 
-            if (socketClient.getConnection().isClosed()) {
-                System.out.println("Reopening closed socket");
                 socketClient = getNewSocketClient(url);
+
+                socketClient.connect();
+                Log.d(X, "Created new instance for " + url);
+            } else {
+                Log.d(X, "Has old instance");
+                socketClient = socketMap.get(url);
+                System.out.println("isOpen: " + socketClient.getConnection().isOpen());
+                System.out.println("isClosed: " + socketClient.getConnection().isClosed());
+                System.out.println("isClosing: " + socketClient.getConnection().isClosing());
+
+                if (socketClient.getConnection().isClosed()) {
+                    System.out.println("Reopening closed socket");
+                    socketClient = getNewSocketClient(url);
+                }
             }
+
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
+
 
         return socketClient;
     }
 
-    public AdvancedWebSocketClient getNewSocketClient(final String url) throws URISyntaxException {
+    private AdvancedWebSocketClient getNewSocketClient(final String url) throws URISyntaxException {
+
         return new AdvancedWebSocketClient(new URI(url), new Draft_17()) {
             @Override
             public void onOpen(ServerHandshake handshakedata) {
                 super.onOpen(handshakedata);
                 Log.i(X, "Socket opened and added to cache");
-
-
+                send(new SocketMessage("Total terminals connected : " + socketMap.size(), true));
                 socketMap.put(url, this);
             }
 
@@ -93,30 +100,27 @@ public class WebSocketHelper {
                     CommandFactory.getCommand(command).handle(context, new BaseCommand.Callback() {
                         @Override
                         public void onError(String message) {
-
+                            send(new SocketMessage(message, true, true));
                         }
 
                         @Override
                         public void onInfo(String message) {
-
+                            send(new SocketMessage(message, false));
                         }
 
                         @Override
                         public void onSuccess(String message) {
-                            try {
-                                send(new SocketMessage(message));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                            send(new SocketMessage(message, false));
+                        }
+
+                        @Override
+                        public void onFinish(String message) {
+                            send(new SocketMessage(message, true));
                         }
                     });
                 } catch (JSONException | BaseCommand.CommandException | ParseException e) {
                     e.printStackTrace();
-                    try {
-                        send(new SocketMessage(e.getMessage(), true));
-                    } catch (JSONException e1) {
-                        e1.printStackTrace();
-                    }
+                    send(new SocketMessage(e.getMessage(), true, true));
                 }
 
             }
