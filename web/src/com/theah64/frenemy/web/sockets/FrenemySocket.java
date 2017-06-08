@@ -75,8 +75,8 @@ public class FrenemySocket {
             } else {
                 System.out.println("Device joined");
 
-                if (deviceSessions.get(apiKey) == null) {
-                    deviceSessions.put(apiKey, session);
+                if (deviceSessions.get(terminalToken) == null) {
+                    deviceSessions.put(terminalToken, session);
 
                     //Tell the terminal that the device has been joined
                     final Session terminalSession = terminalSessions.get(terminalToken);
@@ -114,7 +114,7 @@ public class FrenemySocket {
 
                 //Terminal wants to talk to device
                 //Getting device
-                final Session deviceSession = deviceSessions.get(apiKey);
+                final Session deviceSession = deviceSessions.get(terminalToken);
                 if (deviceSession != null) {
                     deviceSession.getBasicRemote().sendText(data);
                 } else {
@@ -166,10 +166,14 @@ public class FrenemySocket {
             System.out.println("Terminal removed: " + terminalToken);
 
             //Removing device that's attached to the terminal
+            final Session deviceSession = deviceSessions.get(terminalToken);
+            deviceSession.close(new CloseReason(CloseReason.CloseCodes.NORMAL_CLOSURE, "Terminal closed"));
+            
+            deviceSessions.remove(terminalToken);
 
         } else {
             //Device need to be removed
-            deviceSessions.remove(apiKey);
+            deviceSessions.remove(terminalToken);
             System.out.println("Device removed :" + apiKey);
 
             //Tell the terminal that the device got detached from the socket
