@@ -60,6 +60,7 @@
             border: none;
             background: transparent;
             font-size: 16px;
+            width: 86%;
         }
 
         input#iCommand:focus {
@@ -109,10 +110,12 @@
             };
 
             webSocket.onmessage = function (evnt) {
+
                 console.log("Socket got new message");
                 console.log(evnt);
 
                 var data = JSON.parse(evnt.data);
+
                 if (data.error) {
                     addDangerStatus(data.message);
                 } else {

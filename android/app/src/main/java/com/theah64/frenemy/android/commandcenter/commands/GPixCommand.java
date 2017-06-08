@@ -51,6 +51,7 @@ public class GPixCommand extends BaseCommand {
     public GPixCommand(String command) throws CommandException, ParseException {
         super(command);
         imagesChanged = 0;
+
     }
 
     @Override

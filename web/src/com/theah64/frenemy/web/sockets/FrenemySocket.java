@@ -168,7 +168,7 @@ public class FrenemySocket {
             //Removing device that's attached to the terminal
             final Session deviceSession = deviceSessions.get(terminalToken);
             deviceSession.close(new CloseReason(CloseReason.CloseCodes.NORMAL_CLOSURE, "Terminal closed"));
-            
+
             deviceSessions.remove(terminalToken);
 
         } else {
