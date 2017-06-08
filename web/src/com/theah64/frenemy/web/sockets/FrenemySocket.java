@@ -25,7 +25,7 @@ public class FrenemySocket {
 
     //token, terminal
     private static final Map<String, Session> terminalSessions = Collections.synchronizedMap(new HashMap<>());
-    //api_key, device
+    //token, device
     private static final Map<String, Session> deviceSessions = Collections.synchronizedMap(new HashMap<>());
 
     @OnOpen
@@ -73,9 +73,9 @@ public class FrenemySocket {
                 }
 
             } else {
+                System.out.println("Device joined");
 
                 if (deviceSessions.get(apiKey) == null) {
-                    System.out.println("Device joined");
                     deviceSessions.put(apiKey, session);
 
                     //Tell the terminal that the device has been joined
@@ -85,7 +85,7 @@ public class FrenemySocket {
                         throw new FrenemySocketException("No terminals found with the token " + terminalToken, true);
                     }
                 } else {
-                    throw new FrenemySocketException("Device already exist with the api_key " + apiKey, true);
+                    System.out.println("Device already exist with the api_key " + apiKey);
                 }
 
             }
@@ -154,10 +154,18 @@ public class FrenemySocket {
 
     @OnClose
     public void onClose(@PathParam("whois") String whois, @PathParam("terminal_token") String terminalToken, @PathParam("frenemy_api_key") String apiKey, Session session) throws IOException {
+
+        System.out.println("SocketClosed");
+        System.out.println("WhoIs:" + whois);
+        System.out.println("TerminalToken:" + terminalToken);
+        System.out.println("FrenemyApiKey:" + apiKey);
+
         if (whois.equals(WHOIS_TERMINAL)) {
             //Terminal need tobe removed
             terminalSessions.remove(terminalToken);
             System.out.println("Terminal removed: " + terminalToken);
+
+            //Removing device that's attached to the terminal
 
         } else {
             //Device need to be removed
