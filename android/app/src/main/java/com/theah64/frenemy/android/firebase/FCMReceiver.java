@@ -30,7 +30,6 @@ public class FCMReceiver extends FirebaseMessagingService {
                 @Override
                 public void onReadyToRequest(String apiKey, String frenemyId) {
                     AdvancedWebSocketClient helper = WebSocketHelper.getInstance(FCMReceiver.this).getHelper(terminalToken, apiKey);
-                    helper.send(new SocketMessage(SocketMessage.WAKEUP_RESPONSE, true));
                 }
 
                 @Override

@@ -19,7 +19,7 @@ public abstract class BaseCommand {
     BaseCommand(String command) throws CommandException, ParseException {
         if (command != null && !command.isEmpty()) {
             this.args = command.split(" ");
-            if (args.length <= 2) {
+            if (getOptions() != null && args.length <= 2) {
                 throw new CommandException("Command should have at least 2 parts");
             } else {
                 //Valid command syntax, check for options

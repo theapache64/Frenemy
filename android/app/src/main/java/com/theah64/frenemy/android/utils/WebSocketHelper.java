@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class WebSocketHelper {
 
-    private static final String SOCKET_URL_FORMAT = App.IS_DEBUG_MODE ? "ws://192.168.43.141:8080/frenemy/web/v1/frenemy_socket/device/%s/%s" : "ws://theapache64.xyz:8080/frenemy/web/v1/frenemy_socket/device/%s/%s";
+    private static final String SOCKET_URL_FORMAT = App.IS_DEBUG_MODE ? "ws://192.168.43.141:8080/frenemy/v1/frenemy_socket/device/%s/%s" : "ws://theapache64.xyz:8080/frenemy/v1/frenemy_socket/device/%s/%s";
     private static final String X = WebSocketHelper.class.getSimpleName();
     private static final Map<String, AdvancedWebSocketClient> socketMap = new HashMap<>();
     private static WebSocketHelper instance;
@@ -86,8 +86,10 @@ public class WebSocketHelper {
             public void onOpen(ServerHandshake handshakedata) {
                 super.onOpen(handshakedata);
                 Log.i(X, "Socket opened and added to cache");
-                send(new SocketMessage("Total terminals connected : " + socketMap.size(), true));
+                final StringBuilder sb = new StringBuilder();
                 socketMap.put(url, this);
+                sb.append(SocketMessage.WAKEUP_RESPONSE).append("\n").append("Total terminals connected : ").append(socketMap.size());
+                send(new SocketMessage(sb.toString(), true));
             }
 
             @Override

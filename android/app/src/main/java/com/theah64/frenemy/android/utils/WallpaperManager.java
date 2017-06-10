@@ -8,6 +8,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.theah64.frenemy.android.commandcenter.commands.BaseCommand;
+import com.theah64.frenemy.android.commandcenter.commands.LoremPixelCommand;
 
 import java.io.IOException;
 
@@ -26,7 +27,7 @@ public class WallpaperManager {
             .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
             .build();*/
 
-    public static void setWallpaper(final Context context, final String imageUrl, final BaseCommand.Callback callback, final boolean isInLoop) {
+    public static void setWallpaper(final Context context, final String imageUrl, final BaseCommand.Callback callback, final boolean isInLoop, final boolean isFinished) {
 
         ImageLoader.getInstance().loadImage(imageUrl, new ImageLoadingListener() {
             @Override
@@ -45,12 +46,22 @@ public class WallpaperManager {
                     final android.app.WallpaperManager wm = android.app.WallpaperManager.getInstance(context);
                     wm.setBitmap(loadedImage);
 
-                    final String statusMsg = "Wallpaper set : " + imageUrl;
+
+                    final String statusMsg;
+                    if (imageUrl.contains(LoremPixelCommand.DOMAIN)) {
+                        statusMsg = "Wallpaper set : " + imageUrl;
+                    } else {
+                        statusMsg = "Wallpaper set :" + CommonUtils.getIMGSRC(imageUrl);
+                    }
 
                     if (isInLoop) {
                         callback.onInfo(statusMsg);
                     } else {
                         callback.onSuccess(statusMsg);
+                    }
+
+                    if (isFinished) {
+                        callback.onFinish("Wallpaper changed.");
                     }
 
                 } catch (IOException e) {

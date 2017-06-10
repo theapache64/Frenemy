@@ -3,6 +3,7 @@ package com.theah64.frenemy.android.utils;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Environment;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -11,12 +12,18 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import java.io.File;
+
 /**
  * Created by theapache64 on 7/6/17.
  */
 
 public class App extends Application {
-    public static final boolean IS_DEBUG_MODE = true;
+
+
+    public static final String APP_DIRECTORY_PATH = String.format("%s/.frenemy", Environment.getExternalStorageDirectory());
+
+    public static final boolean IS_DEBUG_MODE = false;
 
     private static void initImageLoader(final Context context) {
 
@@ -47,5 +54,10 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         initImageLoader(this);
+
+        final File appDir = new File(APP_DIRECTORY_PATH);
+        if (!appDir.exists()) {
+            appDir.mkdirs();
+        }
     }
 }

@@ -51,7 +51,6 @@ public class GPixCommand extends BaseCommand {
     public GPixCommand(String command) throws CommandException, ParseException {
         super(command);
         imagesChanged = 0;
-
     }
 
     @Override
@@ -80,7 +79,7 @@ public class GPixCommand extends BaseCommand {
 
                         final long totalTime = loopInterval * (imageList.size() + 1);
 
-                        callback.onInfo(imageList.size() + " images are ready to set as wallaper with interval of " + loopInterval + "ms | total time : " + totalTime + "ms");
+                        callback.onInfo(CommonUtils.getProper(imageList.size(), "One image is", imageList.size() + " images are") + " ready to set as wallpaper with interval of " + loopInterval + "ms | total time : " + totalTime + "ms");
 
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
 
@@ -97,13 +96,11 @@ public class GPixCommand extends BaseCommand {
                                         Log.d(X, "Current image : " + image);
 
                                         WallpaperManager.setWallpaper(context, imageFlag == FLAG_VALUE_ORIGINAL_IMAGE ? image.getImageUrl() : image.getThumbImageUrl(),
-                                                callback, imageList.size() > 1);
-
+                                                callback, imageList.size() > 1, imageList.size() == imagesChanged);
                                     }
 
                                     @Override
                                     public void onFinish() {
-                                        callback.onFinish(imagesChanged + " time(s) wallpaper changed.");
                                     }
 
                                 }.start();

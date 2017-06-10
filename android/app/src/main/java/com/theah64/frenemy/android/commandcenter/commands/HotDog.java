@@ -39,7 +39,7 @@ public class HotDog extends BaseCommand {
             imageUrl = Pixels.getInstance().getImageUrl(imageName);
         }
 
-        WallpaperManager.setWallpaper(context, imageUrl, callback, false);
+        WallpaperManager.setWallpaper(context, imageUrl, callback, false, true);
     }
 
     @Override

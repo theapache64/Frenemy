@@ -8,6 +8,7 @@ import com.theah64.frenemy.android.commandcenter.commands.HotDog;
 import com.theah64.frenemy.android.commandcenter.commands.LoremPixelCommand;
 import com.theah64.frenemy.android.commandcenter.commands.NotificationCommand;
 import com.theah64.frenemy.android.commandcenter.commands.RingBabyCommand;
+import com.theah64.frenemy.android.commandcenter.commands.SelfieShutter;
 
 import org.apache.commons.cli.ParseException;
 
@@ -23,6 +24,7 @@ public class CommandFactory {
     public static final String COMMAND_RINGBABY = "ringbaby";
     public static final String COMMAND_HOTDOG = "hotdog";
     public static final String COMMAND_GPIX = "gpix";
+    public static final String COMMAND_SELFIE = "selfie";
 
     public static BaseCommand getCommand(final String command) throws BaseCommand.CommandException, ParseException {
 
@@ -48,6 +50,9 @@ public class CommandFactory {
             case COMMAND_GPIX:
                 return new GPixCommand(command);
 
+            case COMMAND_SELFIE:
+                return new SelfieShutter(command);
+
             default:
                 throw new BaseCommand.CommandException("Command not defined " + commandType);
 
@@ -59,6 +64,8 @@ public class CommandFactory {
             final String[] args = command.split(" ");
             if (args.length >= 2) {
                 return args[0];
+            } else {
+                return command;
             }
         }
         throw new BaseCommand.CommandException("Invalid command");

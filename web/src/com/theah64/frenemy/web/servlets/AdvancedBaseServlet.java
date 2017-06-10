@@ -80,7 +80,7 @@ public abstract class AdvancedBaseServlet extends HttpServlet {
 
     protected abstract String[] getRequiredParameters();
 
-    protected abstract void doAdvancedPost() throws JSONException, SQLException, RequestException;
+    protected abstract void doAdvancedPost() throws JSONException, SQLException, RequestException, IOException, ServletException;
 
     public HeaderSecurity getHeaderSecurity() {
         if (!isSecureServlet()) {

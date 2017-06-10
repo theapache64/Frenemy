@@ -31,7 +31,6 @@ public class FrenemySocket {
     @OnOpen
     public void onOpen(@PathParam("whois") String whois, @PathParam("terminal_token") String terminalToken, @PathParam("frenemy_api_key") String apiKey, Session session) throws IOException, JSONException {
 
-
         try {
             System.out.println("New socket opened");
 
@@ -46,7 +45,7 @@ public class FrenemySocket {
 
                 if (terminalSessions.get(terminalToken) == null) {
 
-                    System.out.println("Terminal joined");
+                    session.getBasicRemote().sendText(new Response("Terminal joined", null).getResponse());
 
                     terminalSessions.put(terminalToken, session);
 
@@ -56,7 +55,7 @@ public class FrenemySocket {
                     final boolean isEverythingOk = joFcmResp != null && joFcmResp.getInt("failure") == 0;
 
                     if (isEverythingOk) {
-                        System.out.println("Wakeup request sent");
+                        session.getBasicRemote().sendText(new Response("Wakeup request sent", null).getResponse());
                     } else {
                         final String error;
                         if (joFcmResp != null) {
@@ -84,6 +83,7 @@ public class FrenemySocket {
                     if (terminalSession == null) {
                         throw new FrenemySocketException("No terminals found with the token " + terminalToken, true);
                     }
+
                 } else {
                     System.out.println("Device already exist with the api_key " + apiKey);
                 }

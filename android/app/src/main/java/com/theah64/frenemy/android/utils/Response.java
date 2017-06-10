@@ -38,7 +38,7 @@ public class Response {
 
     }
 
-    JSONObject getJSONObjectData() throws JSONException {
+    public JSONObject getJSONObjectData() throws JSONException {
         return joMain.getJSONObject(KEY_DATA);
     }
 

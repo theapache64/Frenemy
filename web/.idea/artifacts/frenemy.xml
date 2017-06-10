@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="frenemy">
+    <output-path>$PROJECT_DIR$/out/artifacts/frenemy</output-path>
+    <root id="archive" name="frenemy.war">
+      <element id="artifact" artifact-name="Frenemy Web:war exploded" />
+    </root>
+  </artifact>
+</component>

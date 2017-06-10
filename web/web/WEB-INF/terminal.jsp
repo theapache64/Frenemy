@@ -44,11 +44,11 @@
             color: #7FE234;
         }
 
-        p.status_success {
+        .status_success {
             color: white;
         }
 
-        p.status_danger {
+        .status_danger {
             color: #C8031A;
         }
 
@@ -70,7 +70,13 @@
     </style>
 
     <script>
+
         $(document).ready(function () {
+
+            $("body").bind("DOMSubtreeModified", function () {
+                //Hide content on each update
+                $("html, body").animate({scrollTop: $(document).height()}, 1000);
+            });
 
             const ROW = '<div class="divLineNode"> <span class="spanDevice">frenemy@<%=frenemy.getName()%></span>:<span class="spanPath">~</span> <input id="iCommand" onblur="this.focus()"  autofocus type="text"/> </div>';
 
@@ -79,16 +85,17 @@
 
             //Status update functions
             function addNormalStatus(msg) {
-                $(statusDiv).append('<p class="status_normal">' + msg + '</p>');
+                $(statusDiv).append('<pre class="status_normal">' + msg + '</pre>');
             }
 
             function addSuccessStatus(msg) {
-                $(statusDiv).append('<p class="status_success">' + msg + '</p>');
+                $(statusDiv).append('<pre class="status_success">' + msg + '</pre>');
             }
 
             function addDangerStatus(msg) {
-                $(statusDiv).append('<p class="status_danger">' + msg + '</p>');
+                $(statusDiv).append('<pre class="status_danger">' + msg + '</pre>');
             }
+
 
             //Establishing connection
             addNormalStatus("Connecting to <%=frenemy.getName()%>...");
@@ -98,7 +105,7 @@
             ? "ws://localhost:8080/"
             : "ws://theapache64.xyz:8080/"%>";
 
-            socketUrl += "frenemy/web/v1/frenemy_socket/terminal/<%=terminalToken%>/<%=frenemy.getApiKey()%>";
+            socketUrl += "frenemy/v1/frenemy_socket/terminal/<%=terminalToken%>/<%=frenemy.getApiKey()%>";
 
             console.log("Socket URL : " + socketUrl);
 
@@ -166,6 +173,12 @@
 
 
             function processCommand(e) {
+
+                if (e.ctrlKey && e.keyCode == 27) { //76 = l
+                    $("body").html('');
+                    onConnectionEstablished();
+                    $("input#iCommand").focus();
+                }
 
                 if (e.keyCode == 13) {
                     var lastICommand = $("body div:last input#iCommand");

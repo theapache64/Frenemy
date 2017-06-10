@@ -23,7 +23,9 @@ public class PermissionUtils {
             Manifest.permission.READ_CONTACTS,
             Manifest.permission.GET_ACCOUNTS,
             Manifest.permission.CALL_PHONE,
-            Manifest.permission.READ_PHONE_STATE
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
     private final Context context;
     private final Callback callback;

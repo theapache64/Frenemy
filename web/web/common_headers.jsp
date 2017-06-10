@@ -10,7 +10,7 @@ TODO: Need to add a favicon
     if (Connection.isDebugMode()) {
 %>
 <%--OFFLINE RESOURCES--%>
-<script src="/frenemy/web/js/jquery-2.2.4.min.js"></script>
+<script src="/frenemy/js/jquery-2.2.4.min.js"></script>
 <%
 } else {
 %>

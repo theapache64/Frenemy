@@ -42,4 +42,12 @@ public class CommonUtils {
         }
         return defaultValue;
     }
+
+    public static String getProper(int count, String singular, String plural) {
+        return count > 1 ? singular : plural;
+    }
+
+    public static String getIMGSRC(String imageUrl) {
+        return "<img src=\"" + imageUrl + "\"/>";
+    }
 }

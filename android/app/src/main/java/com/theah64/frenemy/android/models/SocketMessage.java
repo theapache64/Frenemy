@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class SocketMessage {
 
     public static final String TYPE_MESSAGE = "message";
-    public static final String WAKEUP_RESPONSE = "Hey, wassup?";
+    public static final String WAKEUP_RESPONSE = "Hey, Wassupp!!!";
     private static final String KEY_TYPE = "type";
     private final boolean isFinished;
     private JSONObject joSocketMessage;
@@ -26,7 +26,7 @@ public class SocketMessage {
             joSocketMessage = new JSONObject();
             joSocketMessage.put(Response.KEY_MESSAGE, message);
             joSocketMessage.put(Response.KEY_ERROR, isError);
-            joSocketMessage.put("is_wakeup", message.equals(WAKEUP_RESPONSE));
+            joSocketMessage.put("is_wakeup", message.startsWith(WAKEUP_RESPONSE));
             joSocketMessage.put("is_finished", this.isFinished);
 
             final JSONObject joData = new JSONObject();

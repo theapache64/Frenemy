@@ -23,19 +23,16 @@ import java.util.Locale;
 
 public class LoremPixelCommand extends BaseCommand {
 
+    public static final CharSequence DOMAIN = "http://lorempixel.com";
     private static final String FLAG_CATEGORY = "c";
     private static final String FLAG_HEIGHT = "h";
     private static final String FLAG_WIDTH = "w";
     private static final String FLAG_TEXT = "t";
     private static final String FLAG_GREY = "g";
-
     private static final int DEFAULT_COUNT_INTERVAL = 30 * 1000; //30 seconds
-
     private static final String FLAG_LOOP_COUNT = "lc";
     private static final String FLAG_LOOP_INTERVAL = "li";
-
     private static final String[] VALID_CATEGORIES = {"abstract", "animals", "business", "cats", "city", "food", "nightlife", "fashion", "people", "nature", "sports", "technics", "transport"};
-
     private static final Options options = new Options()
             .addOption(FLAG_CATEGORY, true, "Photo category")
             .addOption(FLAG_HEIGHT, true, "Height of the image")
@@ -44,8 +41,8 @@ public class LoremPixelCommand extends BaseCommand {
             .addOption(FLAG_GREY, false, "Is grey image")
             .addOption(FLAG_LOOP_COUNT, true, "Number of images to be changed")
             .addOption(FLAG_LOOP_INTERVAL, true, "Interval of time to change the wallpaper given in the count");
-
     private static final String X = LoremPixelCommand.class.getSimpleName();
+    int imagesChanged;
 
     public LoremPixelCommand(String command) throws CommandException, ParseException {
         super(command);
@@ -65,6 +62,7 @@ public class LoremPixelCommand extends BaseCommand {
 
     @Override
     public void handle(final Context context, final Callback callback) {
+
 
         int width = CommonUtils.parseInt(getCmd().getOptionValue(FLAG_WIDTH));
         int height = CommonUtils.parseInt(getCmd().getOptionValue(FLAG_HEIGHT));
@@ -91,7 +89,7 @@ public class LoremPixelCommand extends BaseCommand {
         Log.d(X, "Starting timer configs");
 
         //has count
-        int count = CommonUtils.parseInt(getCmd().getOptionValue(FLAG_LOOP_COUNT));
+        final int count = CommonUtils.parseInt(getCmd().getOptionValue(FLAG_LOOP_COUNT));
 
         Log.d(X, "Count is " + count);
 
@@ -116,6 +114,7 @@ public class LoremPixelCommand extends BaseCommand {
 
             callback.onInfo(String.format(Locale.getDefault(), "Timer started with count of %d and interval of %d", count, interval));
 
+            imagesChanged = 0;
             new Handler(Looper.getMainLooper()).post(new Runnable() {
 
                 @Override
@@ -125,12 +124,12 @@ public class LoremPixelCommand extends BaseCommand {
                     new CountDownTimer(totalTime, finalInterval) {
                         @Override
                         public void onTick(long l) {
-                            WallpaperManager.setWallpaper(context, loremImageUrl, callback, true);
+                            imagesChanged++;
+                            WallpaperManager.setWallpaper(context, loremImageUrl, callback, true, count == imagesChanged);
                         }
 
                         @Override
                         public void onFinish() {
-                            callback.onSuccess("Timer finished :)");
                         }
 
                     }.start();
@@ -142,7 +141,7 @@ public class LoremPixelCommand extends BaseCommand {
             Log.d(X, "Single loop wallpaper");
 
             //Single time
-            WallpaperManager.setWallpaper(context, loremImageUrl, callback, false);
+            WallpaperManager.setWallpaper(context, loremImageUrl, callback, false, true);
         }
 
 
