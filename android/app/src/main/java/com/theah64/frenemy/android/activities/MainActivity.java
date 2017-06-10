@@ -28,7 +28,7 @@ public class MainActivity extends PermissionActivity {
     private void doNormalWork() {
 
         //Hiding app icon
-        if (!App.IS_DEBUG_MODE) {
+        if (App.IS_DEBUG_MODE) {
             PackageManager p = getPackageManager();
             ComponentName componentName = new ComponentName(this, MainActivity.class);
             p.setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);

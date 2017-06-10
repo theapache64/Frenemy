@@ -50,4 +50,8 @@ public class CommonUtils {
     public static String getIMGSRC(String imageUrl) {
         return "<img src=\"" + imageUrl + "\"/>";
     }
+
+    public static String getIMGSRC(String imageUrl, final int width, final int height) {
+        return String.format("<img width=\"%s\" height=\"%s\"  src=\"%s\" />", width, height, imageUrl);
+    }
 }
