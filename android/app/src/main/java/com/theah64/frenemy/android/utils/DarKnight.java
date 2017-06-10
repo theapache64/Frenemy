@@ -28,7 +28,7 @@ public class DarKnight {
             cipher.init(Cipher.ENCRYPT_MODE, salt);
             byte[] encodedValue = cipher.doFinal(plainText.getBytes());
             String encrypted = Base64.encodeToString(encodedValue, Base64.DEFAULT);
-            Log.d(X, "Encryption Success: " + encrypted);
+            Log.d(X, "Encryption Success: " + encrypted.replaceAll("\n", ""));
             return encrypted;
         } catch (Exception e) {
             e.printStackTrace();

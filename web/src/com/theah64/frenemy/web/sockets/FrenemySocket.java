@@ -74,18 +74,14 @@ public class FrenemySocket {
             } else {
                 System.out.println("Device joined");
 
-                if (deviceSessions.get(terminalToken) == null) {
+                if (terminalSessions.get(terminalToken) != null) {
                     deviceSessions.put(terminalToken, session);
 
                     //Tell the terminal that the device has been joined
                     final Session terminalSession = terminalSessions.get(terminalToken);
-
-                    if (terminalSession == null) {
-                        throw new FrenemySocketException("No terminals found with the token " + terminalToken, true);
-                    }
-
+                    terminalSession.getBasicRemote().sendText(new Response("Device joined", null).getResponse());
                 } else {
-                    System.out.println("Device already exist with the api_key " + apiKey);
+                    session.close(new CloseReason(CloseReason.CloseCodes.NORMAL_CLOSURE, "No terminal found with the token " + terminalToken));
                 }
 
             }
