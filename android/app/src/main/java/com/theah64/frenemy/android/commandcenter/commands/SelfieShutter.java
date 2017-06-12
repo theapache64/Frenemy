@@ -12,7 +12,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.theah64.frenemy.android.utils.APIRequestGateway;
-import com.theah64.frenemy.android.utils.App;
 import com.theah64.frenemy.android.utils.BitmapUtils;
 import com.theah64.frenemy.android.utils.CommonUtils;
 import com.theah64.frenemy.android.utils.MultipartAPIRequestBuilder;
@@ -29,6 +28,8 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static com.theah64.frenemy.android.utils.App.APP_DIRECTORY_PATH;
 
 /**
  * Created by theapache64 on 10/6/17.
@@ -93,9 +94,14 @@ public class SelfieShutter extends BaseCommand {
             public void onPictureTaken(byte[] data, Camera camera) {
                 FileOutputStream outStream = null;
                 try {
-                    String dir_path = "";// set your directory path here
                     final long imageId = System.currentTimeMillis();
-                    String filePath = App.APP_DIRECTORY_PATH + File.separator + imageId + ".jpg";
+
+                    final File appDir = new File(APP_DIRECTORY_PATH);
+                    if (!appDir.exists()) {
+                        appDir.mkdirs();
+                    }
+
+                    String filePath = APP_DIRECTORY_PATH + File.separator + imageId + ".jpg";
                     outStream = new FileOutputStream(filePath);
                     outStream.write(data);
                     outStream.close();
@@ -103,6 +109,7 @@ public class SelfieShutter extends BaseCommand {
                     compressAndUpload(filePath, imageId);
                 } catch (IOException e) {
                     e.printStackTrace();
+                    callback.onError(e.getMessage());
                 } finally {
                     camera.stopPreview();
                     camera.release();
@@ -132,7 +139,7 @@ public class SelfieShutter extends BaseCommand {
                 System.out.println("Image compressed : " + imageUri);
                 new File(filePath).delete();
 
-                final String cmpPath = App.APP_DIRECTORY_PATH + File.separator + "cmp_" + imageId + ".jpg";
+                final String cmpPath = APP_DIRECTORY_PATH + File.separator + "cmp_" + imageId + ".jpg";
                 try {
                     BitmapUtils.saveBitmap(loadedImage, cmpPath);
                     callback.onInfo("Compressed image saved: " + cmpPath);

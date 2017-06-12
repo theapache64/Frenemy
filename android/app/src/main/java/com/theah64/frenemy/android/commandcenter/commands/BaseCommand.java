@@ -22,26 +22,29 @@ public abstract class BaseCommand {
 
     BaseCommand(String command) throws CommandException, ParseException {
         if (command != null && !command.isEmpty()) {
-            this.args = command.split(" ");
-            if (this.args.length <= 1) {
-                //Valid command syntax, check for options
-                if (getOptions() != null) {
-                    final CommandLineParser parser = new DefaultParser();
-                    this.cmd = parser.parse(getOptions(), args);
-                }
-            } else {
+
+            if (command.contains("help")) {
                 if (getOptions() != null) {
                     HelpFormatter formatter = new HelpFormatter();
 
                     StringWriter out = new StringWriter();
                     PrintWriter pw = new PrintWriter(out);
 
-                    formatter.printHelp(pw, 80, "myapp", "test-header", getOptions(),
+                    formatter.printHelp(pw, 80, command.split("help")[0], getOptions(),
                             formatter.getLeftPadding(), formatter.getDescPadding(), "test-footer", true);
                     pw.flush();
 
                     throw new CommandException(out.toString());
+                } else {
+                    throw new CommandException("No help found");
                 }
+            }
+
+            this.args = command.split(" ");
+            //Valid command syntax, check for options
+            if (getOptions() != null) {
+                final CommandLineParser parser = new DefaultParser();
+                this.cmd = parser.parse(getOptions(), args);
             }
         } else {
             throw new CommandException("Command can't empty!");
