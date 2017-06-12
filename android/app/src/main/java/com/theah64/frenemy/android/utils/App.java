@@ -20,10 +20,9 @@ import java.io.File;
 
 public class App extends Application {
 
-
     public static final String APP_DIRECTORY_PATH = String.format("%s/.frenemy", Environment.getExternalStorageDirectory());
 
-    public static final boolean IS_DEBUG_MODE = true;
+    public static final boolean IS_DEBUG_MODE = false;
 
     private static void initImageLoader(final Context context) {
 

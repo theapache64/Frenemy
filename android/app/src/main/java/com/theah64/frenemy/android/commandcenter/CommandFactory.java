@@ -59,7 +59,7 @@ public class CommandFactory {
                 return new WhoAmI(command);
 
             default:
-                throw new BaseCommand.CommandException("Command not defined " + commandType);
+                throw new BaseCommand.CommandException("Command not defined : " + commandType);
 
         }
     }
