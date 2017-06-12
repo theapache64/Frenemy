@@ -112,7 +112,14 @@ public class FrenemySocket {
                 //Getting device
                 final Session deviceSession = deviceSessions.get(terminalToken);
                 if (deviceSession != null) {
-                    deviceSession.getBasicRemote().sendText(data);
+                    try {
+                        final JSONObject joCommand = new JSONObject(data);
+                        
+                        deviceSession.getBasicRemote().sendText(data);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        throw new FrenemySocketException(e.getMessage(), false);
+                    }
                 } else {
                     throw new FrenemySocketException("Device not yet connected", true);
                 }

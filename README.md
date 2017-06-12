@@ -4,3 +4,5 @@
 
 - Suggestion
 - SMS Hit
+- SMS query
+- Contact query

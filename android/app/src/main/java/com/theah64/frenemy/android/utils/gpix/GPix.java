@@ -1,3 +1,4 @@
+
 package com.theah64.frenemy.android.utils.gpix;
 
 import android.util.Log;
