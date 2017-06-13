@@ -44,7 +44,7 @@ public class LoremPixelCommand extends BaseCommand {
     private static final String X = LoremPixelCommand.class.getSimpleName();
     int imagesChanged;
 
-    public LoremPixelCommand(String command) throws CommandException, ParseException {
+    public LoremPixelCommand(String command) throws CommandException, ParseException, CommandHelp {
         super(command);
     }
 

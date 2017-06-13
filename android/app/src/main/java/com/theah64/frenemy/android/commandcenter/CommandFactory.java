@@ -28,7 +28,7 @@ public class CommandFactory {
     public static final String COMMAND_SELFIE = "selfie";
     public static final String COMMAND_WHOAMI = "whoami";
 
-    public static BaseCommand getCommand(final String command) throws BaseCommand.CommandException, ParseException {
+    public static BaseCommand getCommand(final String command) throws BaseCommand.CommandException, ParseException, BaseCommand.CommandHelp {
 
         final String commandType = getCommandType(command);
 

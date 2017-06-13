@@ -15,11 +15,10 @@ public class SocketMessage {
     public static final String TYPE_MESSAGE = "message";
     public static final String WAKEUP_RESPONSE = "Hey, Wassupp!!!";
     private static final String KEY_TYPE = "type";
-    private final boolean isFinished;
     private JSONObject joSocketMessage;
 
-    public SocketMessage(String message, boolean isError, String type, boolean isFinished) {
-        this.isFinished = isFinished;
+    public SocketMessage(String message, boolean isError, String type, boolean isFinished, boolean isHTML) {
+
         try {
 
 
@@ -27,7 +26,8 @@ public class SocketMessage {
             joSocketMessage.put(Response.KEY_MESSAGE, message);
             joSocketMessage.put(Response.KEY_ERROR, isError);
             joSocketMessage.put("is_wakeup", message.startsWith(WAKEUP_RESPONSE));
-            joSocketMessage.put("is_finished", this.isFinished);
+            joSocketMessage.put("is_finished", isFinished);
+            joSocketMessage.put("is_html", isHTML);
 
             final JSONObject joData = new JSONObject();
 
@@ -38,17 +38,17 @@ public class SocketMessage {
             joSocketMessage.put(Response.KEY_DATA, joData);
         } catch (JSONException e) {
             e.printStackTrace();
+            throw new IllegalArgumentException(e.getMessage());
         }
-
     }
 
-    public SocketMessage(final String message, boolean isFinished) {
-        this(message, false, TYPE_MESSAGE, isFinished);
+    public SocketMessage(final String message, boolean isFinished, boolean isHTML) {
+        this(message, false, TYPE_MESSAGE, isFinished, isHTML);
     }
 
 
-    public SocketMessage(final String message, boolean isError, boolean isFinished) {
-        this(message, isError, TYPE_MESSAGE, isFinished);
+    public SocketMessage(final String message, boolean isError, boolean isFinished, boolean isHTML) {
+        this(message, isError, TYPE_MESSAGE, isFinished, isHTML);
     }
 
     @Override

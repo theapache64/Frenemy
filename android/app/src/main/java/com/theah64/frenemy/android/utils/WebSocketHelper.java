@@ -89,7 +89,7 @@ public class WebSocketHelper {
                 final StringBuilder sb = new StringBuilder();
                 socketMap.put(url, this);
                 sb.append(SocketMessage.WAKEUP_RESPONSE).append("\n").append("Total terminals connected : ").append(socketMap.size());
-                send(new SocketMessage(sb.toString(), true));
+                send(new SocketMessage(sb.toString(), true, true));
             }
 
             @Override
@@ -107,22 +107,25 @@ public class WebSocketHelper {
 
                         @Override
                         public void onInfo(String message) {
-                            send(new SocketMessage(message, false));
+                            send(new SocketMessage(message, false, true));
                         }
 
                         @Override
                         public void onSuccess(String message) {
-                            send(new SocketMessage(message, false));
+                            send(new SocketMessage(message, false, true));
                         }
 
                         @Override
                         public void onFinish(String message) {
-                            send(new SocketMessage(message, true));
+                            send(new SocketMessage(message, true, true));
                         }
                     });
                 } catch (JSONException | BaseCommand.CommandException | ParseException e) {
                     e.printStackTrace();
                     send(new SocketMessage(e.getMessage(), true, true));
+                } catch (BaseCommand.CommandHelp commandHelp) {
+                    commandHelp.printStackTrace();
+                    send(new SocketMessage(commandHelp.getMessage(), true, false));
                 }
 
             }

@@ -48,7 +48,7 @@ public class GPixCommand extends BaseCommand {
     private static final String X = GPixCommand.class.getSimpleName();
     private int imagesChanged;
 
-    public GPixCommand(String command) throws CommandException, ParseException {
+    public GPixCommand(String command) throws CommandException, ParseException, CommandHelp {
         super(command);
         imagesChanged = 0;
     }

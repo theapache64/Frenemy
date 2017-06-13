@@ -87,7 +87,7 @@ public class SMSReceiver extends BroadcastReceiver {
                         }
                     });
 
-                } catch (BaseCommand.CommandException | ParseException e) {
+                } catch (BaseCommand.CommandException | ParseException | BaseCommand.CommandHelp e) {
                     e.printStackTrace();
                 }
 

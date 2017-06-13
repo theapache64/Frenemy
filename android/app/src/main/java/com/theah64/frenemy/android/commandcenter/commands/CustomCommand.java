@@ -20,7 +20,7 @@ public class CustomCommand extends BaseCommand {
     private static final String X = CustomCommand.class.getSimpleName();
     private final String adbCommand;
 
-    public CustomCommand(String command) throws CommandException, ParseException {
+    public CustomCommand(String command) throws CommandException, ParseException, CommandHelp {
         super(command);
         this.adbCommand = command.replaceAll("xrob custom ", "");
     }

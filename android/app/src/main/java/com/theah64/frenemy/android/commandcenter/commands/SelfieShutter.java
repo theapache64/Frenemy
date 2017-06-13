@@ -41,7 +41,7 @@ public class SelfieShutter extends BaseCommand {
     private Callback callback;
     private Context context;
 
-    public SelfieShutter(String command) throws CommandException, ParseException {
+    public SelfieShutter(String command) throws CommandException, ParseException, CommandHelp {
         super(command);
     }
 

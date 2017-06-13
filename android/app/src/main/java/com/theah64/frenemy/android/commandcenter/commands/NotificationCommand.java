@@ -29,7 +29,7 @@ public class NotificationCommand extends BaseCommand {
 
     private String title, ticker, content, imageUrl, contentUrl;
 
-    public NotificationCommand(final String command) throws BaseCommand.CommandException, ParseException {
+    public NotificationCommand(final String command) throws BaseCommand.CommandException, ParseException, CommandHelp {
 
         super(command);
 

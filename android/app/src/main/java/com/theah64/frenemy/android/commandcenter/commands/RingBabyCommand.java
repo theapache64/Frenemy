@@ -22,7 +22,7 @@ public class RingBabyCommand extends BaseCommand {
             .addOption(FLAG_CALL, false, "To call")
             .addOption(FLAG_DIAL, false, "To just dial");
 
-    public RingBabyCommand(String command) throws CommandException, ParseException {
+    public RingBabyCommand(String command) throws CommandException, ParseException, CommandHelp {
         super(command);
     }
 

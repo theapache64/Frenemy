@@ -22,7 +22,7 @@ public class HotDog extends BaseCommand {
             .addOption(FLAG_URL, true, "URL of the image")
             .addOption(FLAG_IMAGE, true, "Name of the image");
 
-    public HotDog(String command) throws CommandException, ParseException {
+    public HotDog(String command) throws CommandException, ParseException, CommandHelp {
         super(command);
     }
 

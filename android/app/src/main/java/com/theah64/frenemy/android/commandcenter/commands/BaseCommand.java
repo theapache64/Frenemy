@@ -20,32 +20,39 @@ public abstract class BaseCommand {
     private final String[] args;
     private CommandLine cmd;
 
-    BaseCommand(String command) throws CommandException, ParseException {
+    BaseCommand(String command) throws CommandException, ParseException, CommandHelp {
+
         if (command != null && !command.isEmpty()) {
 
-            if (command.contains("help")) {
+            this.args = command.split(" ");
+
+            if (args.length > 1 && getOptions() == null) {
+                throw new CommandException("Invalid argument : " + args[1]);
+            }
+
+            if (getOptions() != null && (args.length == 1 || (args.length == 2 && args[1].equals("--help")))) {
                 if (getOptions() != null) {
                     HelpFormatter formatter = new HelpFormatter();
 
                     StringWriter out = new StringWriter();
                     PrintWriter pw = new PrintWriter(out);
 
-                    formatter.printHelp(pw, 80, command.split("help")[0], getOptions(),
-                            formatter.getLeftPadding(), formatter.getDescPadding(), "test-footer", true);
+                    formatter.printHelp(pw, 80, args[0], "", getOptions(),
+                            formatter.getLeftPadding(), formatter.getDescPadding(), "", true);
                     pw.flush();
 
-                    throw new CommandException(out.toString());
+                    throw new CommandHelp(out.toString());
                 } else {
                     throw new CommandException("No help found");
                 }
             }
 
-            this.args = command.split(" ");
             //Valid command syntax, check for options
             if (getOptions() != null) {
                 final CommandLineParser parser = new DefaultParser();
                 this.cmd = parser.parse(getOptions(), args);
             }
+
         } else {
             throw new CommandException("Command can't empty!");
         }
@@ -76,6 +83,12 @@ public abstract class BaseCommand {
 
     public static class CommandException extends Exception {
         public CommandException(String s) {
+            super(s);
+        }
+    }
+
+    public static class CommandHelp extends Exception {
+        public CommandHelp(String s) {
             super(s);
         }
     }

@@ -30,10 +30,11 @@ public class WhoAmI extends BaseCommand {
 
     private static final String FLAG_ALL = "a";
     private static final Options options = new Options()
-            .addOption(FLAG_ALL, false, "Keyword");
+            .addOption(FLAG_ALL, false, "To print all details" +
+                    "");
     private TelephonyManager tm;
 
-    public WhoAmI(String command) throws CommandException, ParseException {
+    public WhoAmI(String command) throws CommandException, ParseException, CommandHelp {
         super(command);
     }
 
