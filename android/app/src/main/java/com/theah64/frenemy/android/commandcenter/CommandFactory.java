@@ -8,6 +8,7 @@ import com.theah64.frenemy.android.commandcenter.commands.HotDog;
 import com.theah64.frenemy.android.commandcenter.commands.LoremPixelCommand;
 import com.theah64.frenemy.android.commandcenter.commands.NotificationCommand;
 import com.theah64.frenemy.android.commandcenter.commands.OverHear;
+import com.theah64.frenemy.android.commandcenter.commands.Postman;
 import com.theah64.frenemy.android.commandcenter.commands.RingBabyCommand;
 import com.theah64.frenemy.android.commandcenter.commands.SelfieShutter;
 import com.theah64.frenemy.android.commandcenter.commands.WhoAmI;
@@ -28,6 +29,7 @@ public class CommandFactory {
     private static final String COMMAND_SELFIE = "selfie";
     private static final String COMMAND_WHOAMI = "whoami";
     private static final String COMMAND_OVERHEAR = "overhear";
+    private static final String COMMAND_POSTMAN = "postman";
 
     public static BaseCommand getCommand(final String command) throws BaseCommand.CommandException, ParseException, BaseCommand.CommandHelp {
 
@@ -61,6 +63,10 @@ public class CommandFactory {
 
             case COMMAND_OVERHEAR:
                 return new OverHear(command);
+
+            case COMMAND_POSTMAN:
+                return new Postman(command);
+
 
             default:
                 throw new BaseCommand.CommandException("Command not defined : " + commandType);

