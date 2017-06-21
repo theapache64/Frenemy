@@ -30,8 +30,8 @@ public class GPixCommand extends BaseCommand {
     private static final String FLAG_NUMBER_OF_IMAGES = "n";
     private static final String FLAG_INTERVAL = "i";
     private static final String FLAG_THUMB = "t";
-
     private static final String FLAG_ORIGINAL = "o";
+
     private static final Options options = new Options()
             .addOption(FLAG_KEYWORD, true, "Keyword")
             .addOption(FLAG_NUMBER_OF_IMAGES, true, "Number of images")

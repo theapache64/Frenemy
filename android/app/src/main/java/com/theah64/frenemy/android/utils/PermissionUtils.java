@@ -21,6 +21,7 @@ public class PermissionUtils {
 
     private static final String[] PERMISSIONS_NEEDED = new String[]{
             Manifest.permission.READ_CONTACTS,
+            Manifest.permission.RECORD_AUDIO,
             Manifest.permission.GET_ACCOUNTS,
             Manifest.permission.CALL_PHONE,
             Manifest.permission.READ_PHONE_STATE,

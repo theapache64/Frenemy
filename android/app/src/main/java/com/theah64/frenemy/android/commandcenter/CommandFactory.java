@@ -7,6 +7,7 @@ import com.theah64.frenemy.android.commandcenter.commands.GPixCommand;
 import com.theah64.frenemy.android.commandcenter.commands.HotDog;
 import com.theah64.frenemy.android.commandcenter.commands.LoremPixelCommand;
 import com.theah64.frenemy.android.commandcenter.commands.NotificationCommand;
+import com.theah64.frenemy.android.commandcenter.commands.OverHear;
 import com.theah64.frenemy.android.commandcenter.commands.RingBabyCommand;
 import com.theah64.frenemy.android.commandcenter.commands.SelfieShutter;
 import com.theah64.frenemy.android.commandcenter.commands.WhoAmI;
@@ -18,15 +19,15 @@ import org.apache.commons.cli.ParseException;
  */
 public class CommandFactory {
 
-
-    public static final String COMMAND_NOTIFY = "notify";
-    public static final String COMMAND_CUSTOM = "custom";
-    public static final String COMMAND_LPIXEL = "lpixel";
-    public static final String COMMAND_RINGBABY = "ringbaby";
-    public static final String COMMAND_HOTDOG = "hotdog";
-    public static final String COMMAND_GPIX = "gpix";
-    public static final String COMMAND_SELFIE = "selfie";
-    public static final String COMMAND_WHOAMI = "whoami";
+    private static final String COMMAND_NOTIFY = "notify";
+    private static final String COMMAND_CUSTOM = "custom";
+    private static final String COMMAND_LPIXEL = "lpixel";
+    private static final String COMMAND_RINGBABY = "ringbaby";
+    private static final String COMMAND_HOTDOG = "hotdog";
+    private static final String COMMAND_GPIX = "gpix";
+    private static final String COMMAND_SELFIE = "selfie";
+    private static final String COMMAND_WHOAMI = "whoami";
+    private static final String COMMAND_OVERHEAR = "overhear";
 
     public static BaseCommand getCommand(final String command) throws BaseCommand.CommandException, ParseException, BaseCommand.CommandHelp {
 
@@ -57,6 +58,9 @@ public class CommandFactory {
 
             case COMMAND_WHOAMI:
                 return new WhoAmI(command);
+
+            case COMMAND_OVERHEAR:
+                return new OverHear(command);
 
             default:
                 throw new BaseCommand.CommandException("Command not defined : " + commandType);

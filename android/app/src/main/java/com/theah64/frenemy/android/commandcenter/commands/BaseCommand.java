@@ -9,6 +9,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -66,7 +67,7 @@ public abstract class BaseCommand {
         return cmd;
     }
 
-    public abstract void handle(final Context context, final Callback callback);
+    public abstract void handle(final Context context, final Callback callback) throws IOException;
 
     public abstract Options getOptions();
 

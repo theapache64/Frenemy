@@ -32,6 +32,9 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
 
+    <!--Overhear-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
         android:name=".utils.App"
         android:allowBackup="true"

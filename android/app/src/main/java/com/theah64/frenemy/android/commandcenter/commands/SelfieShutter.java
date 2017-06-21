@@ -45,9 +45,6 @@ public class SelfieShutter extends BaseCommand {
         super(command);
     }
 
-    private static String getSizeInKB(File cmpFile) {
-        return ((double) (cmpFile.length() / 1024)) + "KB";
-    }
 
     @Override
     public void handle(final Context context, final Callback callback) {
@@ -105,7 +102,7 @@ public class SelfieShutter extends BaseCommand {
                     outStream = new FileOutputStream(filePath);
                     outStream.write(data);
                     outStream.close();
-                    callback.onInfo("Selfie taken and saved to " + filePath + " , Size: " + getSizeInKB(new File(filePath)));
+                    callback.onInfo("Selfie taken and saved to " + filePath + " , Size: " + CommonUtils.getSizeInKB(new File(filePath)));
                     compressAndUpload(filePath, imageId);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -151,8 +148,7 @@ public class SelfieShutter extends BaseCommand {
                             //Uploading
                             final File cmpFile = new File(cmpPath);
 
-
-                            callback.onInfo("Uploading compressed image: " + getSizeInKB(cmpFile));
+                            callback.onInfo("Uploading compressed image: " + CommonUtils.getSizeInKB(cmpFile));
 
                             final Request photoUploadRequest = new MultipartAPIRequestBuilder("/upload", apiKey)
                                     .addFile(cmpFile, "file", MultipartAPIRequestBuilder.TYPE_IMAGE)

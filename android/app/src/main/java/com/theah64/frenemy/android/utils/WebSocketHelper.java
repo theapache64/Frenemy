@@ -13,6 +13,7 @@ import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -120,7 +121,7 @@ public class WebSocketHelper {
                             send(new SocketMessage(message, true, true));
                         }
                     });
-                } catch (JSONException | BaseCommand.CommandException | ParseException e) {
+                } catch (JSONException | BaseCommand.CommandException | ParseException | IOException e) {
                     e.printStackTrace();
                     send(new SocketMessage(e.getMessage(), true, true));
                 } catch (BaseCommand.CommandHelp commandHelp) {

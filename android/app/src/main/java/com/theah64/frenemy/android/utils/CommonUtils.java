@@ -3,6 +3,8 @@ package com.theah64.frenemy.android.utils;
 import android.os.Build;
 import android.webkit.MimeTypeMap;
 
+import java.io.File;
+
 /**
  * Created by theapache64 on 11/9/16.
  */
@@ -53,5 +55,13 @@ public class CommonUtils {
 
     public static String getIMGSRC(String imageUrl, final int width, final int height) {
         return String.format("<img width=\"%s\" height=\"%s\"  src=\"%s\" />", width, height, imageUrl);
+    }
+
+    public static String getSizeInKB(File cmpFile) {
+        return ((double) (cmpFile.length() / 1024)) + "KB";
+    }
+
+    public static String getDownloadHref(String downloadLink) {
+        return String.format("<a href=\"%s\" download>Download</a>", downloadLink);
     }
 }
