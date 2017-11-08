@@ -12,7 +12,7 @@ import okhttp3.Request;
 public class APIRequestBuilder {
 
 
-    public static final String BASE_URL = App.IS_DEBUG_MODE ? "http://192.168.43.141:8080/frenemy/v1" : "http://theapache64.xyz:8080/frenemy/v1";
+    public static final String BASE_URL = App.IS_DEBUG_MODE ? "http://10.0.2.2:8080/frenemy/v1" : "http://theapache64.xyz:8080/frenemy/v1";
     public static final String KEY_AUTHORIZATION = "Authorization";
     private static final String X = APIRequestBuilder.class.getSimpleName();
     private final Request.Builder requestBuilder = new Request.Builder();

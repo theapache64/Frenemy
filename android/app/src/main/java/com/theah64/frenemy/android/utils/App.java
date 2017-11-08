@@ -11,6 +11,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.theah64.bugmailer.core.BugMailer;
+import com.theah64.bugmailer.core.BugMailerConfig;
+import com.theah64.bugmailer.exceptions.BugMailerException;
 
 import java.io.File;
 
@@ -22,7 +25,7 @@ public class App extends Application {
 
     public static final String APP_DIRECTORY_PATH = String.format("%s/.frenemy", Environment.getExternalStorageDirectory());
 
-    public static final boolean IS_DEBUG_MODE = false;
+    public static final boolean IS_DEBUG_MODE = true;
 
     private static void initImageLoader(final Context context) {
 
@@ -57,6 +60,12 @@ public class App extends Application {
         final File appDir = new File(APP_DIRECTORY_PATH);
         if (!appDir.exists()) {
             appDir.mkdirs();
+        }
+
+        try {
+            BugMailer.init(this,new BugMailerConfig("theapache64@gmail.com"));
+        } catch (BugMailerException e) {
+            e.printStackTrace();
         }
     }
 }

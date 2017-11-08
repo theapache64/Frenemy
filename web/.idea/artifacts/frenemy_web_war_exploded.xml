@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="frenemy_web:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/frenemy_web_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="frenemy_web/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="frenemy_web" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="application" name="mail" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

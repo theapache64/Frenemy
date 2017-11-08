@@ -29,7 +29,7 @@
 <head>
     <title><%=frenemy.getName()%> @ Frenemy Web
     </title>
-    <%@include file="../common_headers.jsp" %>
+    <%@include file="common_headers.jsp" %>
     <style>
         * {
             font-family: 'Ubuntu Mono', monospace;
