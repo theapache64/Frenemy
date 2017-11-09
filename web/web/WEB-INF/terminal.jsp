@@ -1,7 +1,7 @@
-<%@ page import="com.theah64.frenemy.web.utils.PathInfo" %>
-<%@ page import="com.theah64.frenemy.web.model.Frenemy" %>
 <%@ page import="com.theah64.frenemy.web.database.tables.Frenemies" %>
 <%@ page import="com.theah64.frenemy.web.exceptions.RequestException" %>
+<%@ page import="com.theah64.frenemy.web.model.Frenemy" %>
+<%@ page import="com.theah64.frenemy.web.utils.PathInfo" %>
 <%@ page import="com.theah64.frenemy.web.utils.RandomString" %><%--suppress ALL --%>
 <%
     Frenemy frenemy = null;
@@ -9,10 +9,10 @@
     try {
         final PathInfo pathInfo = new PathInfo(request.getPathInfo(), 1, 1);
         terminalToken = RandomString.getRandomString(30);
-        final String deviceHash = pathInfo.getPart(1);
-        System.out.println("Device hash : " + deviceHash);
+        final String apiKey = pathInfo.getPart(1);
+        System.out.println("Device API Key : " + apiKey);
 
-        frenemy = Frenemies.getInstance().get(Frenemies.COLUMN_DEVICE_HASH, deviceHash);
+        frenemy = Frenemies.getInstance().get(Frenemies.COLUMN_API_KEY, apiKey);
         if (frenemy == null) {
             throw new RequestException("Invalid frenemy");
         }
@@ -29,7 +29,7 @@
 <head>
     <title><%=frenemy.getName()%> @ Frenemy Web
     </title>
-    <%@include file="common_headers.jsp" %>
+    <%@include file="../common_headers.jsp" %>
     <style>
         * {
             font-family: 'Ubuntu Mono', monospace;

@@ -3,9 +3,7 @@ package com.theah64.frenemy.web.servlets;
 import com.theah64.frenemy.web.database.Connection;
 import com.theah64.frenemy.web.exceptions.RequestException;
 import com.theah64.frenemy.web.utils.Response;
-
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -61,11 +59,14 @@ public class UploadServlet extends AdvancedBaseServlet {
             if (voiceFilePart != null) {
 
 
-                final File dataDir = new File("/opt/tomcat8/webapps/data");
+                final File dataDir = new File("/var/www/html/frenemy_data");
 
                 System.out.println(dataDir.getAbsolutePath());
                 if (!dataDir.exists()) {
                     dataDir.mkdirs();
+                    dataDir.setReadable(true, false);
+                    dataDir.setExecutable(true, false);
+                    dataDir.setWritable(true, false);
                 }
 
                 final String fileName = Paths.get(voiceFilePart.getSubmittedFileName()).getFileName().toString();
@@ -84,7 +85,11 @@ public class UploadServlet extends AdvancedBaseServlet {
                 fos.close();
                 is.close();
 
-                fileDownloadPath = voiceFile.getAbsolutePath().split("/webapps")[1];
+                voiceFile.setReadable(true, false);
+                voiceFile.setExecutable(true, false);
+                voiceFile.setWritable(true, false);
+
+                fileDownloadPath = voiceFile.getAbsolutePath().split("/html")[1];
                 getWriter().write(new Response("File uploaded", "download_link", getBaseUrl() + fileDownloadPath).getResponse());
             }
 
@@ -95,6 +100,6 @@ public class UploadServlet extends AdvancedBaseServlet {
     }
 
     public static String getBaseUrl() {
-        return Connection.isDebugMode() ? "http://localhost:8080" : "http://theapache64.xyz:8080";
+        return Connection.isDebugMode() ? "http://localhost" : "http://theapache64.xyz";
     }
 }

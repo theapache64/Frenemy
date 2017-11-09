@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class WebSocketHelper {
 
-    private static final String SOCKET_URL_FORMAT = App.IS_DEBUG_MODE ? "ws://192.168.43.141:8080/frenemy/v1/frenemy_socket/device/%s/%s" : "ws://theapache64.xyz:8080/frenemy/v1/frenemy_socket/device/%s/%s";
+    private static final String SOCKET_URL_FORMAT = App.IS_DEBUG_MODE ? "ws://192.168.1.4:8080/frenemy/v1/frenemy_socket/device/%s/%s" : "ws://theapache64.xyz:8080/frenemy/v1/frenemy_socket/device/%s/%s";
     private static final String X = WebSocketHelper.class.getSimpleName();
     private static final Map<String, AdvancedWebSocketClient> socketMap = new HashMap<>();
     private static WebSocketHelper instance;

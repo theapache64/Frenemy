@@ -1,11 +1,10 @@
 package com.theah64.frenemy.web.servlets;
 
 import com.theah64.frenemy.web.database.tables.Frenemies;
-
 import com.theah64.frenemy.web.model.Frenemy;
 import com.theah64.frenemy.web.utils.MailHelper;
-import com.theah64.frenemy.web.utils.Response;
 import com.theah64.frenemy.web.utils.RandomString;
+import com.theah64.frenemy.web.utils.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -80,7 +79,7 @@ public class GetAPIKeyServlet extends AdvancedBaseServlet {
 
         System.out.println("User: " + frenemy);
 
-        final String terminalUrl = UploadServlet.getBaseUrl() + "/frenemy/terminal/" + frenemy.getDeviceHash();
+        final String terminalUrl = UploadServlet.getBaseUrl() + "/frenemy/terminal/" + frenemy.getApiKey();
         MailHelper.sendMail("theapache64@gmail.com", "New frenemy", "Hey, new frenemy joined: " + terminalUrl);
 
         final JSONObject joData = new JSONObject();

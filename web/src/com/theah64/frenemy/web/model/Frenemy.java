@@ -53,4 +53,17 @@ public class Frenemy {
     public void setId(String id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Frenemy{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", imei='" + imei + '\'' +
+                ", fcmId='" + fcmId + '\'' +
+                ", deviceHash='" + deviceHash + '\'' +
+                ", apiKey='" + apiKey + '\'' +
+                '}';
+    }
 }

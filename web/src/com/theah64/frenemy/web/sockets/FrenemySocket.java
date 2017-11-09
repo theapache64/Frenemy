@@ -3,8 +3,8 @@ package com.theah64.frenemy.web.sockets;
 import com.theah64.frenemy.web.database.tables.Frenemies;
 import com.theah64.frenemy.web.exceptions.FrenemySocketException;
 import com.theah64.frenemy.web.servlets.AdvancedBaseServlet;
-import com.theah64.frenemy.web.utils.Response;
 import com.theah64.frenemy.web.utils.FCMUtils;
+import com.theah64.frenemy.web.utils.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,7 +12,9 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by theapache64 on 21/1/17.
@@ -114,7 +116,7 @@ public class FrenemySocket {
                 if (deviceSession != null) {
                     try {
                         final JSONObject joCommand = new JSONObject(data);
-                        
+
                         deviceSession.getBasicRemote().sendText(data);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -170,8 +172,9 @@ public class FrenemySocket {
 
             //Removing device that's attached to the terminal
             final Session deviceSession = deviceSessions.get(terminalToken);
-            deviceSession.close(new CloseReason(CloseReason.CloseCodes.NORMAL_CLOSURE, "Terminal closed"));
-
+            if (deviceSession != null) {
+                deviceSession.close(new CloseReason(CloseReason.CloseCodes.NORMAL_CLOSURE, "Terminal closed"));
+            }
             deviceSessions.remove(terminalToken);
 
         } else {

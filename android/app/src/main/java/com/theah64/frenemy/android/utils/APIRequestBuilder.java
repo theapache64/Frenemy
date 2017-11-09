@@ -8,11 +8,13 @@ import okhttp3.Request;
 /**
  * Created by shifar on 29/7/16.
  * Utility class to create API request object.
+ * http://192.168.1.4:8080/frenemy/v1/get_api_key
+ * http://198.168.1.4:8080/frenemy/v1/get_api_key
  */
 public class APIRequestBuilder {
 
 
-    public static final String BASE_URL = App.IS_DEBUG_MODE ? "http://10.0.2.2:8080/frenemy/v1" : "http://theapache64.xyz:8080/frenemy/v1";
+    public static final String BASE_URL = App.IS_DEBUG_MODE ? "http://192.168.1.4:8080/frenemy/v1" : "http://theapache64.xyz:8080/frenemy/v1";
     public static final String KEY_AUTHORIZATION = "Authorization";
     private static final String X = APIRequestBuilder.class.getSimpleName();
     private final Request.Builder requestBuilder = new Request.Builder();

@@ -20,7 +20,7 @@ public class Frenemies extends BaseTable<Frenemy> {
         super("frenemies");
     }
 
-    private static final Frenemies instance     = new Frenemies();
+    private static final Frenemies instance = new Frenemies();
 
     public static Frenemies getInstance() {
         return instance;
