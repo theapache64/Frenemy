@@ -26,7 +26,7 @@ import okhttp3.Response;
  */
 public class GPix {
 
-    private static final String API_URL_FORMAT = "http://theapache64.xyz:8080/gpix/v1/gpix?keyword=%s&limit=%d";
+    private static final String API_URL_FORMAT = "http://theapache64.com/gpix/v1/gpix?keyword=%s&limit=%d";
     private static final String AUTHORIZATION = "WYAfuHwjCu";
     private static final String X = GPix.class.getSimpleName();
 

@@ -103,7 +103,7 @@
 
             var socketUrl = "<%=Connection.isDebugMode()
             ? "ws://localhost:8080/"
-            : "ws://theapache64.xyz:8080/"%>";
+            : "ws://theapache64.com/"%>";
 
             socketUrl += "frenemy/v1/frenemy_socket/terminal/<%=terminalToken%>/<%=frenemy.getApiKey()%>";
 

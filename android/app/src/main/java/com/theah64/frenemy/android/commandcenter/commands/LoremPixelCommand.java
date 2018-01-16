@@ -42,7 +42,7 @@ public class LoremPixelCommand extends BaseCommand {
             .addOption(FLAG_LOOP_COUNT, true, "Number of images to be changed")
             .addOption(FLAG_LOOP_INTERVAL, true, "Interval of time to change the wallpaper given in the count");
     private static final String X = LoremPixelCommand.class.getSimpleName();
-    int imagesChanged;
+    private int imagesChanged;
 
     public LoremPixelCommand(String command) throws CommandException, ParseException, CommandHelp {
         super(command);

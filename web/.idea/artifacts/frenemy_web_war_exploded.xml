@@ -7,9 +7,7 @@
         <element id="directory" name="classes">
           <element id="module-output" name="frenemy_web" />
         </element>
-        <element id="directory" name="lib">
-          <element id="library" level="application" name="mail" />
-        </element>
+        <element id="directory" name="lib" />
       </element>
     </root>
   </artifact>

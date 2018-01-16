@@ -12,7 +12,7 @@ import java.sql.SQLException;
  */
 public class Connection {
 
-    private static final boolean debugMode = true;
+    private static final boolean debugMode = false;
     private static DataSource ds;
 
     public static java.sql.Connection getConnection() {
@@ -22,7 +22,7 @@ public class Connection {
             if (ds == null) {
                 final Context initContext = new InitialContext();
                 Context envContext = (Context) initContext.lookup("java:/comp/env");
-                ds = (DataSource) envContext.lookup(debugMode ? "jdbc/frenemyLocal" : "jdbc/frenemyRemote");
+                ds = (DataSource) envContext.lookup("jdbc/frenemy");
             }
 
             return ds.getConnection();
