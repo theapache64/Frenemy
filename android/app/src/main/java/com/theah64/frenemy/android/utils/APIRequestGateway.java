@@ -1,15 +1,15 @@
 package com.theah64.frenemy.android.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.theah64.bugmailer.core.BugMailer;
 import com.theah64.frenemy.android.models.Frenemy;
 
 import org.json.JSONException;
@@ -69,7 +69,7 @@ public class APIRequestGateway implements PermissionUtils.Callback {
         //Collecting needed information
         final String name = profileUtils.getDeviceOwnerName();
 
-        final String imei = tm.getDeviceId();
+        @SuppressLint("MissingPermission") final String imei = tm.getDeviceId();
         final String deviceName = getDeviceName();
         final String deviceHash = DarKnight.getEncrypted(deviceName + imei);
 
@@ -157,7 +157,7 @@ public class APIRequestGateway implements PermissionUtils.Callback {
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                     Log.e(X, "Failed to signup employee");
-                    FirebaseCrash.report(e);
+                    BugMailer.report(e);
                 }
             }
 

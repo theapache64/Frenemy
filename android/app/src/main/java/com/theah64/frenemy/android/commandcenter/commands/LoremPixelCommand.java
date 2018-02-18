@@ -33,6 +33,7 @@ public class LoremPixelCommand extends BaseCommand {
     private static final String FLAG_LOOP_COUNT = "lc";
     private static final String FLAG_LOOP_INTERVAL = "li";
     private static final String[] VALID_CATEGORIES = {"abstract", "animals", "business", "cats", "city", "food", "nightlife", "fashion", "people", "nature", "sports", "technics", "transport"};
+
     private static final Options options = new Options()
             .addOption(FLAG_CATEGORY, true, "Photo category")
             .addOption(FLAG_HEIGHT, true, "Height of the image")
@@ -41,6 +42,7 @@ public class LoremPixelCommand extends BaseCommand {
             .addOption(FLAG_GREY, false, "Is grey image")
             .addOption(FLAG_LOOP_COUNT, true, "Number of images to be changed")
             .addOption(FLAG_LOOP_INTERVAL, true, "Interval of time to change the wallpaper given in the count");
+
     private static final String X = LoremPixelCommand.class.getSimpleName();
     private int imagesChanged;
 

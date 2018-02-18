@@ -99,7 +99,7 @@ public class UploadServlet extends AdvancedBaseServlet {
 
     }
 
-    public static String getBaseUrl() {
-        return Connection.isDebugMode() ? "http://localhost" : "http://theapache64.xyz";
+    static String getBaseUrl() {
+        return Connection.isDebugMode() ? "http://localhost" : "http://theapache64.com:8090";
     }
 }
