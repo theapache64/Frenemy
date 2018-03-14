@@ -27,6 +27,7 @@ public class FrenemySocket {
 
     //token, terminal
     private static final Map<String, Session> terminalSessions = Collections.synchronizedMap(new HashMap<>());
+
     //token, device
     private static final Map<String, Session> deviceSessions = Collections.synchronizedMap(new HashMap<>());
 
